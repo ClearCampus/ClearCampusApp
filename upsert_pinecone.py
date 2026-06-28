@@ -55,7 +55,8 @@ new_ids = {url_to_id(club["url"]) for club in clubs}
 print("Checking for removed clubs...")
 existing_ids: set[str] = set()
 for id_batch in index.list():
-    existing_ids.update(id_batch)
+    for item in id_batch:
+        existing_ids.add(item.id if hasattr(item, "id") else str(item))
 
 removed = existing_ids - new_ids
 
