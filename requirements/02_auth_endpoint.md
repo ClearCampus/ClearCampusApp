@@ -12,7 +12,7 @@ Expose a REST API endpoint that validates the client's Firebase Auth state, sync
 - **Access Control**: Public (but requires a valid header token).
 
 ### 2. Backend Flow
-1. Extract and verify the JWT via [01_firebase_auth.md](file:///c:/Users/stoof/ClearCampusProject/ClearCampusApp/requirements/01_firebase_auth.md).
+1. Extract and verify the JWT via [01_firebase_auth.md](01_firebase_auth.md).
 2. Validate that the email is verified in Firebase Auth (recommended).
 3. Query the `users` collection in Firestore using the decoded `uid`.
 4. **If user does not exist in Firestore**:
