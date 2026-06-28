@@ -39,7 +39,7 @@ App Runner reads the container configuration from a custom config or AWS Console
 
 ### 3. Local Development vs. Production Environments
 - **Local Development**:
-  - Environment variables should be defined locally in a `.env` file (copied from [\.env.example](file:///c:/Users/stoof/ClearCampusProject/ClearCampusApp/.env.example) and excluded from Git).
+  - Environment variables should be defined locally in a `.env` file (copied from [`.env.example`](../.env.example) and excluded from Git).
   - The application uses `python-dotenv` to load these local environment variables on startup.
 - **Production (AWS App Runner / Docker)**:
   - Environment variables are injected at runtime by the container orchestrator / AWS App Runner configuration. 

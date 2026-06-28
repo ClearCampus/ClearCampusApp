@@ -12,6 +12,12 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
     Expects format: Authorization: Bearer <token>
     """
     token = credentials.credentials
+    if firebase_client.db is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Firebase service is unconfigured or unavailable.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     try:
         # Verify the ID token using Firebase Admin SDK
         # This checks the signature, expiration, and project matching
@@ -30,11 +36,13 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
             headers={"WWW-Authenticate": "Bearer"},
         )
     except Exception as e:
+        print(f"Token verification failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail=f"Token verification failed: {str(e)}",
+            detail="Token verification failed",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
 
 def verify_tamu_email(email: str) -> bool:
     """

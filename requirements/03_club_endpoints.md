@@ -25,7 +25,7 @@ Provide secure REST API endpoints for club owners to create, update, or delete c
 - **Execution Flow**:
   1. Add record to the `clubs` collection in Firestore, generating a unique `club_id`. Assign the requesting user's `uid` as the owner.
   2. Format the search text as `"{name} | {description}"`.
-  3. Generate a 1536-dim vector embedding using OpenAI's `text-embedding-3-small` (similar to [textembed.py](file:///c:/Users/stoof/ClearCampusProject/ClearCampusApp/textembed.py)).
+  3. Generate a 1536-dim vector embedding using OpenAI's `text-embedding-3-small` (similar to [textembed.py](../textembed.py)).
   4. Upsert the vector to the `tamu-clubs` Pinecone index with the `club_id` as the vector ID.
 - **Response**: `201 Created` with the new club object.
 
@@ -45,7 +45,7 @@ Provide secure REST API endpoints for club owners to create, update, or delete c
 - **Execution Flow**:
   1. Confirm ownership in Firestore.
   2. Delete the club document in Firestore.
-  3. Call Pinecone `index.delete(ids=[club_id])` to remove the embedding vector (similar to [upsert_pinecone.py](file:///c:/Users/stoof/ClearCampusProject/ClearCampusApp/upsert_pinecone.py)).
+  3. Call Pinecone `index.delete(ids=[club_id])` to remove the embedding vector (similar to [upsert_pinecone.py](../upsert_pinecone.py)).
 - **Response**: `204 No Content`.
 
 ### 3. Performance & Cost Considerations

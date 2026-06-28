@@ -103,10 +103,11 @@ if REBUILD:
 
 # 3. Load Club Data and Email Mappings
 print("Loading club data and email mappings...")
-with open("tamu_clubs_embedded.json") as f:
+base_dir = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(base_dir, "tamu_clubs_embedded.json"), encoding="utf-8") as f:
     embedded_clubs = json.load(f)
 
-with open("club_emails.json") as f:
+with open(os.path.join(base_dir, "club_emails.json"), encoding="utf-8") as f:
     email_mappings = json.load(f)
 
 scraped_club_ids = {url_to_id(club["url"]) for club in embedded_clubs}
@@ -148,6 +149,7 @@ for i, club in enumerate(embedded_clubs):
         # Existing document: update scraped details, preserve owner settings
         existing_data = existing_docs[club_id]
         update_data = {
+            "id": club_id,
             "name": club["name"],
             "description": club["description"],
             "url": club["url"],
