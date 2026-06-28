@@ -1,5 +1,4 @@
 import json
-import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
@@ -8,33 +7,42 @@ from bs4 import BeautifulSoup
 BASE = "https://getinvolved.tamu.edu/organizations"
 HEADERS = {"User-Agent": "Mozilla/5.0"}
 WORKERS = 20
-clubs = []
+TOTAL_PAGES = 58
 
-# Step 1: collect basic info from all listing pages (sequential — one server)
-for page in range(1, 59):  # 58 pages
-    print(f"Scraping page {page}/58...")
+session = requests.Session()
+session.headers.update(HEADERS)
 
-    res = requests.get(BASE, params={"page": page}, headers=HEADERS)
+# Step 1: fetch all listing pages in parallel
+def fetch_page(page):
+    res = session.get(BASE, params={"page": page}, timeout=10)
     soup = BeautifulSoup(res.text, "html.parser")
-
     cards = soup.select("div.relative.border.rounded-sm.shadow-sm.text-center")
-
+    results = []
     for card in cards:
         name_el = card.select_one("h3, h2")
         desc_el = card.select_one("p")
         link_el = card.select_one("a[href]")
+        results.append({
+            "name": name_el.text.strip() if name_el else "",
+            "description": desc_el.text.strip() if desc_el else "",
+            "url": link_el["href"] if link_el else "",
+            "email": "none",
+        })
+    return page, results
 
-        clubs.append(
-            {
-                "name": name_el.text.strip() if name_el else "",
-                "description": desc_el.text.strip() if desc_el else "",
-                "url": link_el["href"] if link_el else "",
-                "email": "none",
-            }
-        )
+print(f"Scraping {TOTAL_PAGES} listing pages ({WORKERS} workers)...")
+page_results = {}
+with ThreadPoolExecutor(max_workers=WORKERS) as executor:
+    futures = {executor.submit(fetch_page, p): p for p in range(1, TOTAL_PAGES + 1)}
+    for future in as_completed(futures):
+        page, results = future.result()
+        page_results[page] = results
 
-    print(f"  → {len(cards)} clubs found on this page")
-    time.sleep(0.4)
+# Reassemble in order
+clubs = []
+for page in range(1, TOTAL_PAGES + 1):
+    clubs.extend(page_results[page])
+print(f"  → {len(clubs)} clubs found across all pages")
 
 # Step 2: fetch detail pages concurrently to grab emails
 session = requests.Session()
