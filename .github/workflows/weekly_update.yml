@@ -37,6 +37,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add tamu_clubs.json tamu_clubs_embedded.json
+          git add tamu_clubs.json tamu_clubs_embedded.json pending_deletion.json
           git diff --cached --quiet || git commit -m "chore: weekly club data update $(date -u +%Y-%m-%d)"
           git push

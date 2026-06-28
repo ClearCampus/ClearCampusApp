@@ -1,6 +1,7 @@
 import json
 import os
 import time
+from datetime import datetime, timezone
 
 from dotenv import load_dotenv
 from pinecone import Pinecone, ServerlessSpec
@@ -17,6 +18,7 @@ INDEX_NAME = "tamu-clubs"
 DIMS = 1536
 METRIC = "cosine"
 BATCH_SIZE = 100
+PENDING_FILE = "pending_deletion.json"
 
 
 def url_to_id(url: str) -> str:
@@ -56,11 +58,46 @@ for id_batch in index.list():
     existing_ids.update(id_batch)
 
 removed = existing_ids - new_ids
+
+# Load existing pending deletions to avoid duplicates
+if os.path.exists(PENDING_FILE):
+    with open(PENDING_FILE) as f:
+        pending = json.load(f)
+else:
+    pending = []
+
+already_pending = {entry["id"] for entry in pending}
+
 if removed:
-    print(f"Deleting {len(removed)} removed clubs...")
-    removed_list = list(removed)
-    for i in range(0, len(removed_list), BATCH_SIZE):
-        index.delete(ids=removed_list[i : i + BATCH_SIZE])
+    newly_removed = removed - already_pending
+    print(f"{len(removed)} clubs no longer in scrape; {len(newly_removed)} newly flagged for deletion.")
+
+    if newly_removed:
+        newly_removed_list = list(newly_removed)
+        flagged_on = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+        # Fetch metadata from Pinecone so we have name/url for the email step
+        for i in range(0, len(newly_removed_list), BATCH_SIZE):
+            batch_ids = newly_removed_list[i : i + BATCH_SIZE]
+            result = index.fetch(ids=batch_ids)
+            for vec_id, vec_data in result.vectors.items():
+                meta = vec_data.metadata or {}
+                pending.append(
+                    {
+                        "id": vec_id,
+                        "name": meta.get("name", ""),
+                        "description": meta.get("description", ""),
+                        "url": meta.get("url", ""),
+                        "flagged_on": flagged_on,
+                        "status": "pending",
+                    }
+                )
+
+        with open(PENDING_FILE, "w") as f:
+            json.dump(pending, f, indent=2)
+        print(f"Flagged {len(newly_removed)} clubs in {PENDING_FILE} (kept in index until confirmed).")
+    else:
+        print("All removed clubs are already flagged — no new entries.")
 else:
     print("No clubs removed.")
 
