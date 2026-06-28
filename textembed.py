@@ -32,6 +32,7 @@ for i, club in enumerate(clubs):
             "name": club["name"],
             "description": club["description"],
             "url": club["url"],
+            "email": club.get("email", ""),
             "text": text,
             "vector": vector,
         }

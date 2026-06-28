@@ -113,6 +113,7 @@ for i in range(0, len(clubs), BATCH_SIZE):
                 "name": club["name"],
                 "description": club["description"],
                 "url": club["url"],
+                "email": club.get("email", ""),
                 "text": club["text"],
             },
         }
