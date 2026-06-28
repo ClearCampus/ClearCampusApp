@@ -27,7 +27,7 @@ for page in range(1, 59):  # 58 pages
                 "name": name_el.text.strip() if name_el else "",
                 "description": desc_el.text.strip() if desc_el else "",
                 "url": link_el["href"] if link_el else "",
-                "email": "",
+                "email": "none",
             }
         )
 
@@ -46,6 +46,8 @@ for i, club in enumerate(clubs):
         mailto = detail_soup.select_one("a[href^='mailto:']")
         if mailto:
             club["email"] = mailto["href"].replace("mailto:", "").strip()
+        else:
+            club["email"] = "none"
     except Exception as e:
         print(f"  Warning: could not fetch {club['url']}: {e}")
 
