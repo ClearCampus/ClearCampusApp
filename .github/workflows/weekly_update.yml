@@ -28,10 +28,12 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python textembed.py
 
-      - name: Upsert to Pinecone
+      - name: Sync Firestore & Pinecone
         env:
           PINECONE_API_KEY: ${{ secrets.PINECONE_API_KEY }}
-        run: python upsert_pinecone.py
+          FIREBASE_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+        run: python sync_database.py
+
 
       - name: Commit updated data
         run: |
