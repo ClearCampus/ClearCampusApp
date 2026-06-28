@@ -3,3 +3,6 @@ pinecone
 python-dotenv
 requests
 beautifulsoup4
+fastapi
+uvicorn[standard]
+firebase-admin
