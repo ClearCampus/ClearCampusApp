@@ -14,7 +14,7 @@ session.headers.update(HEADERS)
 
 # Step 1: fetch all listing pages in parallel
 def fetch_page(page):
-    res = session.get(BASE, params={"page": page}, timeout=10)
+    res = session.get(BASE, params={"page": page}, timeout=5)
     soup = BeautifulSoup(res.text, "html.parser")
     cards = soup.select("div.relative.border.rounded-sm.shadow-sm.text-center")
     results = []
@@ -52,7 +52,7 @@ url_to_club = {club["url"]: club for club in clubs if club["url"]}
 
 def fetch_email(url):
     try:
-        detail = session.get(url, timeout=10)
+        detail = session.get(url, timeout=5)
         soup = BeautifulSoup(detail.text, "html.parser")
         mailto = soup.select_one("a[href^='mailto:']")
         return url, mailto["href"].replace("mailto:", "").strip() if mailto else "none"
