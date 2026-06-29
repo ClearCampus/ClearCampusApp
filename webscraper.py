@@ -55,7 +55,7 @@ def fetch_email(url):
         detail = session.get(url, timeout=5)
         soup = BeautifulSoup(detail.text, "html.parser")
         mailto = soup.select_one("a[href^='mailto:']")
-        return url, mailto["href"].replace("mailto:", "").strip() if mailto else "none"
+        return url, str(mailto["href"]).replace("mailto:", "").strip() if mailto else "none"
     except Exception as e:
         print(f"  Warning: could not fetch {url}: {e}")
         return url, "none"
