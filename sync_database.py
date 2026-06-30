@@ -37,7 +37,9 @@ DIMS = 1536
 METRIC = "cosine"
 BATCH_SIZE = 100
 
-def url_to_id(url: str) -> str:
+def url_to_id(url: str | None) -> str:
+    if not url:
+        return ""
     return url.rstrip("/").split("/")[-1] or url
 
 def delete_collection(collection_name: str) -> None:
