@@ -101,14 +101,21 @@ if REBUILD:
     except Exception as e:
         print(f"Warning: Failed to clear Pinecone index: {e}")
 
-# 3. Load Club Data and Email Mappings
-print("Loading club data and email mappings...")
+# 3. Load Club Data
+print("Loading club data...")
 base_dir = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(base_dir, "tamu_clubs_embedded.json"), encoding="utf-8") as f:
     embedded_clubs = json.load(f)
 
-with open(os.path.join(base_dir, "club_emails.json"), encoding="utf-8") as f:
-    email_mappings = json.load(f)
+# Load only new/changed clubs for upsert (produced by textembed.py)
+diff_path = os.path.join(base_dir, "tamu_clubs_diff.json")
+if os.path.exists(diff_path) and not REBUILD:
+    with open(diff_path, encoding="utf-8") as f:
+        clubs_to_sync = json.load(f)
+    print(f"Incremental mode: {len(clubs_to_sync)} new/changed clubs to sync (out of {len(embedded_clubs)} total).")
+else:
+    clubs_to_sync = embedded_clubs
+    print(f"Full sync mode: upserting all {len(embedded_clubs)} clubs.")
 
 scraped_club_ids = {url_to_id(club["url"]) for club in embedded_clubs}
 
@@ -135,16 +142,16 @@ if not REBUILD:
     else:
         print("No clubs removed.")
 
-# B. Upsert current clubs
-print(f"Upserting {len(embedded_clubs)} clubs to Firestore `/clubs` collection...")
+# B. Upsert new/changed clubs only
+print(f"Upserting {len(clubs_to_sync)} clubs to Firestore `/clubs` collection...")
 firestore_batch = db.batch()
 batch_count = 0
 
-for i, club in enumerate(embedded_clubs):
+for i, club in enumerate(clubs_to_sync):
     club_id = url_to_id(club["url"])
     doc_ref = clubs_collection.document(club_id)
-    mapped_email = email_mappings.get(club_id)
-    
+    mapped_email = club.get("email")
+
     if club_id in existing_doc_ids:
         # Existing document: update scraped details, preserve owner settings
         existing_data = existing_docs[club_id]
@@ -155,10 +162,13 @@ for i, club in enumerate(embedded_clubs):
             "url": club["url"],
             "updated_at": firestore.SERVER_TIMESTAMP
         }
-        
-        # Only overwrite official_email if not set, or changed in JSON
-        if mapped_email and existing_data.get("official_email") != mapped_email:
+
+        # Only overwrite official_email/phone if changed
+        if mapped_email and mapped_email != "none" and existing_data.get("official_email") != mapped_email:
             update_data["official_email"] = mapped_email
+        mapped_phone = club.get("phone")
+        if mapped_phone and mapped_phone != "none" and existing_data.get("phone") != mapped_phone:
+            update_data["phone"] = mapped_phone
             
         # Ensure filters block exists
         if "filters" not in existing_data:
@@ -177,7 +187,8 @@ for i, club in enumerate(embedded_clubs):
             "name": club["name"],
             "description": club["description"],
             "url": club["url"],
-            "official_email": mapped_email,
+            "official_email": mapped_email if mapped_email and mapped_email != "none" else None,
+            "phone": club.get("phone") if club.get("phone") != "none" else None,
             "claimed": False,
             "owner_uids": [],
             "filters": {
@@ -192,18 +203,18 @@ for i, club in enumerate(embedded_clubs):
         firestore_batch.set(doc_ref, new_data)
         
     batch_count += 1
-    
+
     # Firestore batches are capped at 500 writes
-    if batch_count >= 400 or (i + 1) == len(embedded_clubs):
+    if batch_count >= 400 or (i + 1) == len(clubs_to_sync):
         firestore_batch.commit()
         print(f"  Committed Firestore batch update: {i+1}/{len(embedded_clubs)}")
         firestore_batch = db.batch()
         batch_count = 0
 
 # 5. Synchronize Pinecone Vectors
-print(f"Upserting {len(embedded_clubs)} vectors to Pinecone...")
-for i in range(0, len(embedded_clubs), BATCH_SIZE):
-    batch = embedded_clubs[i : i + BATCH_SIZE]
+print(f"Upserting {len(clubs_to_sync)} vectors to Pinecone...")
+for i in range(0, len(clubs_to_sync), BATCH_SIZE):
+    batch = clubs_to_sync[i : i + BATCH_SIZE]
     vectors = [
         {
             "id": url_to_id(club["url"]),
@@ -218,6 +229,6 @@ for i in range(0, len(embedded_clubs), BATCH_SIZE):
         for club in batch
     ]
     index.upsert(vectors=vectors)
-    print(f"  Upserted Pinecone batch: {min(i + BATCH_SIZE, len(embedded_clubs))}/{len(embedded_clubs)}")
+    print(f"  Upserted Pinecone batch: {min(i + BATCH_SIZE, len(clubs_to_sync))}/{len(clubs_to_sync)}")
 
 print("Database synchronization completed successfully.")
