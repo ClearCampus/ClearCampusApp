@@ -13,22 +13,28 @@ session = requests.Session()
 session.headers.update(HEADERS)
 
 # Step 1: fetch all listing pages in parallel
-def fetch_page(page):
-    res = session.get(BASE, params={"page": page}, timeout=5)
-    soup = BeautifulSoup(res.text, "html.parser")
-    cards = soup.select("div.relative.border.rounded-sm.shadow-sm.text-center")
-    results = []
-    for card in cards:
-        name_el = card.select_one("h3, h2")
-        desc_el = card.select_one("p")
-        link_el = card.select_one("a[href]")
-        results.append({
-            "name": name_el.text.strip() if name_el else "",
-            "description": desc_el.text.strip() if desc_el else "",
-            "url": link_el["href"] if link_el else "",
-            "email": "none",
-        })
-    return page, results
+def fetch_page(page, retries=3):
+    for attempt in range(retries):
+        try:
+            res = session.get(BASE, params={"page": page}, timeout=15)
+            soup = BeautifulSoup(res.text, "html.parser")
+            cards = soup.select("div.relative.border.rounded-sm.shadow-sm.text-center")
+            results = []
+            for card in cards:
+                name_el = card.select_one("h3, h2")
+                desc_el = card.select_one("p")
+                link_el = card.select_one("a[href]")
+                results.append({
+                    "name": name_el.text.strip() if name_el else "",
+                    "description": desc_el.text.strip() if desc_el else "",
+                    "url": str(link_el["href"]) if link_el else "",
+                    "email": "none",
+                })
+            return page, results
+        except Exception as e:
+            print(f"  Warning: page {page} attempt {attempt + 1} failed: {e}")
+    print(f"  Error: page {page} failed after {retries} attempts, skipping.")
+    return page, []
 
 print(f"Scraping {TOTAL_PAGES} listing pages ({WORKERS} workers)...")
 page_results = {}
