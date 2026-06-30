@@ -115,7 +115,7 @@ scraped_club_ids = {url_to_id(club["url"]) for club in embedded_clubs}
 # 4. Synchronize Firebase Firestore
 print("Fetching current clubs from Firestore...")
 clubs_collection = db.collection("clubs")
-existing_docs = {} if REBUILD else {doc.id: doc.to_dict() for doc in clubs_collection.stream()}
+existing_docs = {} if REBUILD else {doc.id: doc.to_dict() or {} for doc in clubs_collection.stream()}
 existing_doc_ids = set(existing_docs.keys())
 
 # A. Delete removed clubs (only if NOT doing a full rebuild, since rebuild already cleared it)
