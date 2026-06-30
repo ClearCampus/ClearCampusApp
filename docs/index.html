@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Club Discovery Platform</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--fg:#ede9e3;--dim:#7d786f;--bg:#08080a;--panel:#0f0f12;--surface:#161619;--pop:#ff5733;--cool:#3dd6c8;--blue:#5b9cf6;--wire:rgba(255,255,255,0.05)}
+html,body{height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,'Inter',sans-serif;background:var(--bg);color:var(--fg);cursor:none}
+.cursor{position:fixed;pointer-events:none;z-index:10000;width:12px;height:12px;background:#fff;border-radius:50%;margin:-6px 0 0 -6px;transition:width 0.3s cubic-bezier(0.23,1,0.32,1),height 0.3s cubic-bezier(0.23,1,0.32,1),margin 0.3s cubic-bezier(0.23,1,0.32,1),background 0.3s}
+.cursor.hovering{width:48px;height:48px;margin:-24px 0 0 -24px;background:var(--pop)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.015;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.blobs{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.03;animation:drift 25s infinite alternate}
+.b1{width:600px;height:600px;background:var(--pop);top:-15%;left:-10%}
+.b2{width:450px;height:450px;background:var(--cool);bottom:-15%;right:-8%;animation-delay:-10s}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,60px) scale(1.1)}100%{transform:translate(-40px,80px) scale(0.95)}}
+.deck{height:100%;position:relative;z-index:2}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transform:scale(0.95);transition:all 0.7s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;overflow-x:hidden}
+.slide.active{opacity:1;pointer-events:all;transform:scale(1)}
+.nav{position:fixed;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:1.2rem;z-index:100}
+.nav button{width:36px;height:36px;border:1px solid rgba(255,255,255,0.08);border-radius:50%;background:rgba(8,8,10,0.8);color:var(--fg);cursor:none;font-size:0.85rem;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(12px);transition:transform 0.4s cubic-bezier(0.23,1,0.32,1),border-color 0.3s}
+.nav button:hover{border-color:var(--pop)}
+.dots{display:flex;gap:6px}
+.dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.1);transition:all 0.4s;cursor:none}
+.dot.on{background:var(--cool);box-shadow:0 0 8px rgba(61,214,200,0.4)}
+h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2.8rem,5vw,4.2rem);font-weight:400;letter-spacing:-0.03em;line-height:1.08}
+h2{font-family:Georgia,'Times New Roman',serif;font-size:2.2rem;font-weight:400;letter-spacing:-0.02em;margin-bottom:1.5rem}
+h3{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.2em;color:var(--dim);margin-bottom:0.8rem;font-weight:500}
+p{color:var(--dim);line-height:1.75;font-size:0.88rem;max-width:50ch}
+.rv{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.tag{display:inline-block;border:1px solid rgba(255,255,255,0.08);padding:0.3em 0.8em;font-size:0.63rem;letter-spacing:0.06em;color:var(--dim);margin:0.2rem;border-radius:20px;transition:all 0.3s;cursor:none}
+.tag:hover{border-color:var(--cool);color:var(--cool)}
+.marker{display:inline-block;background:var(--pop);color:#fff;padding:0.15em 0.5em;font-size:0.65rem;font-weight:700;letter-spacing:0.05em;margin-right:0.5rem;border-radius:2px}
+.marker.cool{background:var(--cool);color:#000}
+.badge{font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.2em 0.6em;border-radius:2px;margin-bottom:1rem;opacity:0.7;display:inline-block}
+.badge-cust{border:1px solid var(--cool);color:var(--cool)}
+.badge-tech{border:1px solid var(--blue);color:var(--blue)}
+.badge-club{border:1px solid var(--pop);color:var(--pop)}
+.l-center{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 6rem;text-align:center;position:relative}
+.l-split{display:grid;grid-template-columns:1fr 1fr;height:100%}
+.l-split .col{padding:4rem;display:flex;flex-direction:column;justify-content:center;position:relative}
+.l-split .col.panel{background:var(--panel)}
+.l-top{display:flex;flex-direction:column;height:100%}
+.l-top .band{padding:3rem 5rem;background:var(--panel);flex:0 0 28%;display:flex;flex-direction:column;justify-content:center;border-bottom:1px solid var(--wire)}
+.l-top .area{padding:2.5rem 5rem;flex:1}
+.l-full{height:100%;padding:4rem 6rem;display:flex;flex-direction:column;justify-content:center;position:relative}
+.thirds{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem}
+.halves{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.benefit{background:var(--surface);border:1px solid var(--wire);padding:1.8rem;position:relative;transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;overflow:hidden}
+.benefit::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--cool),var(--blue));opacity:0;transition:opacity 0.3s}
+.benefit:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.benefit:hover::before{opacity:1}
+.benefit h4{font-size:0.88rem;color:var(--fg);margin-bottom:0.4rem;font-weight:600}
+.benefit p{font-size:0.78rem}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-box{border:1px solid var(--wire);padding:1.2rem;text-align:center;background:var(--surface);transition:transform 0.3s}
+.stat-box:hover{transform:translateY(-2px)}
+.stat-box .num{font-family:Georgia,serif;font-size:1.8rem;color:var(--cool)}
+.stat-box .lbl{font-size:0.63rem;color:var(--dim);margin-top:0.3rem}
+.vs-block{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;max-width:800px;width:100%;text-align:left}
+.vs-side{padding:2rem;background:var(--surface);border:1px solid var(--wire)}
+.vs-side h4{font-size:0.78rem;font-weight:700;letter-spacing:0.05em;margin-bottom:1rem}
+.vs-side.old h4{color:var(--pop)}
+.vs-side.new h4{color:var(--cool)}
+.vs-side ul{list-style:none;font-size:0.78rem;color:var(--dim);line-height:2.2}
+.vs-side ul li::before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;margin-right:0.6rem;vertical-align:middle}
+.vs-side.old ul li::before{background:var(--pop);opacity:0.5}
+.vs-side.new ul li::before{background:var(--cool);opacity:0.7}
+.vs-divider{width:50px;display:flex;align-items:center;justify-content:center;background:var(--panel);font-size:0.7rem;color:var(--dim);font-weight:700}
+.profile-mock{background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;width:100%}
+.profile-mock h4{font-size:0.7rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+.p-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+.p-tag{padding:0.3em 0.7em;font-size:0.68rem;border-radius:20px;border:1px solid var(--wire);color:var(--dim)}
+.p-tag.vibe{background:rgba(61,214,200,0.08);border-color:rgba(61,214,200,0.25);color:var(--cool)}
+.p-tag.interest{background:rgba(91,156,246,0.08);border-color:rgba(91,156,246,0.2);color:var(--blue)}
+.p-tag.sched{background:rgba(255,87,51,0.06);border-color:rgba(255,87,51,0.15);color:var(--pop)}
+.disc-mock{background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;width:100%}
+.disc-mock h4{font-size:0.7rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+.filter-row{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.f-pill{padding:0.3em 0.7em;font-size:0.63rem;border-radius:20px;border:1px solid var(--wire);color:var(--dim)}
+.f-pill.on{background:var(--cool);border-color:var(--cool);color:#000;font-weight:600}
+.d-card{display:flex;align-items:center;gap:1rem;padding:0.7rem 0;border-bottom:1px solid var(--wire)}
+.d-card:last-child{border-bottom:none}
+.d-card .dc-name{font-size:0.8rem;color:var(--fg);font-weight:500}
+.d-card .dc-meta{font-size:0.63rem;color:var(--dim);margin-top:0.1rem}
+.d-card .dc-fit{font-size:0.6rem;color:var(--cool);margin-left:auto;flex-shrink:0}
+.event-card{background:var(--surface);border:1px solid var(--wire);border-radius:8px;padding:1.2rem;transition:all 0.3s}
+.event-card:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.event-card .ev-date{font-size:0.6rem;color:var(--pop);letter-spacing:0.08em;text-transform:uppercase;font-weight:700;margin-bottom:0.4rem}
+.event-card .ev-name{font-size:0.88rem;color:var(--fg);font-weight:600;margin-bottom:0.3rem}
+.event-card .ev-club{font-size:0.7rem;color:var(--dim)}
+.event-card .ev-tag{display:inline-block;font-size:0.58rem;padding:0.2em 0.5em;border:1px solid var(--wire);border-radius:10px;color:var(--dim);margin-top:0.5rem}
+.dash-mock{background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;width:100%}
+.dash-mock h4{font-size:0.7rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+.dash-stat{display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--wire);font-size:0.78rem}
+.dash-stat:last-child{border-bottom:none}
+.dash-stat .ds-val{color:var(--fg);font-weight:500}
+.onb-steps{display:flex;gap:1.5rem;align-items:flex-start}
+.onb-step{flex:1;background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;text-align:center;position:relative;transition:all 0.3s}
+.onb-step:hover{border-color:rgba(255,255,255,0.1)}
+.onb-step .step-num{font-family:Georgia,serif;font-size:2rem;color:var(--cool);opacity:0.3;margin-bottom:0.5rem}
+.onb-step h4{font-size:0.82rem;color:var(--fg);margin-bottom:0.4rem;font-weight:600}
+.onb-step p{font-size:0.72rem;color:var(--dim);text-align:center;max-width:none}
+.onb-arrow{color:var(--dim);font-size:1.2rem;align-self:center;opacity:0.3}
+.demo-full{height:100%;padding:3rem 5rem;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.search-bar{width:100%;max-width:600px;background:var(--surface);border:1px solid var(--wire);border-radius:8px;padding:1rem 1.5rem;font-size:1rem;color:var(--fg);display:flex;align-items:center;gap:0.8rem;margin-bottom:2rem;transition:border-color 0.4s}
+.search-bar.typing{border-color:var(--cool)}
+.search-bar .sb-text{flex:1;min-height:1.2em}
+.blink{display:inline-block;width:2px;height:1.1em;background:var(--cool);animation:blink 1s step-end infinite;vertical-align:text-bottom;margin-left:2px}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.phase-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1.5rem;height:1.2em}
+.results-area{width:100%;max-width:700px;min-height:220px;display:flex;flex-direction:column;gap:0.8rem;align-items:center}
+.club-card{width:100%;background:var(--surface);border:1px solid var(--wire);border-radius:8px;padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1.2rem;opacity:0;transform:translateY(15px) scale(0.97);transition:all 0.5s cubic-bezier(0.4,0,0.2,1)}
+.club-card.show{opacity:1;transform:translateY(0) scale(1)}
+.club-card .cc-info{flex:1}
+.club-card .cc-name{font-size:0.9rem;color:var(--fg);font-weight:600;margin-bottom:0.2rem}
+.club-card .cc-desc{font-size:0.75rem;color:var(--dim)}
+.club-card .cc-match{font-size:0.7rem;color:var(--cool);font-weight:600;flex-shrink:0;padding:0.3em 0.8em;border:1px solid rgba(61,214,200,0.2);border-radius:20px}
+.run-btn{background:var(--cool);color:#000;border:none;padding:0.5rem 1.2rem;font-size:0.63rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:none;font-family:inherit;border-radius:3px;transition:transform 0.3s cubic-bezier(0.23,1,0.32,1),box-shadow 0.3s}
+.run-btn:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(61,214,200,0.3)}
+.rst-btn{background:transparent;color:var(--dim);border:1px solid var(--wire);padding:0.5rem 1rem;font-size:0.63rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;cursor:none;font-family:inherit;border-radius:3px;transition:all 0.3s}
+.rst-btn:hover{border-color:var(--fg);color:var(--fg)}
+.tilt{position:relative;transition:transform 0.2s ease-out,box-shadow 0.3s;transform-style:preserve-3d;will-change:transform}
+.tilt:hover{box-shadow:0 16px 50px rgba(0,0,0,0.5)}
+.tilt .glare{position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,0.04),transparent 60%);pointer-events:none;opacity:0;transition:opacity 0.3s}
+.tilt:hover .glare{opacity:1}
+.hscroll{display:flex;gap:1.2rem;overflow-x:auto;padding:1rem 0;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.hscroll::-webkit-scrollbar{height:3px}
+.hscroll::-webkit-scrollbar-thumb{background:var(--wire);border-radius:2px}
+.hscroll .hcard{flex:0 0 260px;scroll-snap-align:start;background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;transition:all 0.3s}
+.hscroll .hcard:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.hscroll .hcard h4{font-size:0.85rem;margin-bottom:0.4rem;font-weight:600}
+.hscroll .hcard p{font-size:0.72rem;color:var(--dim)}
+.hscroll .hcard .hc-tag{display:inline-block;font-size:0.58rem;padding:0.2em 0.5em;border:1px solid var(--wire);border-radius:10px;color:var(--dim);margin-top:0.6rem}
+.app-pipeline{display:flex;gap:0.5rem;align-items:stretch;width:100%}
+.app-stage{flex:1;background:var(--surface);border:1px solid var(--wire);border-radius:8px;padding:1rem;min-height:120px;transition:border-color 0.3s}
+.app-stage h5{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--dim);margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center}
+.app-stage h5 .count{background:var(--wire);padding:0.15em 0.4em;border-radius:10px;font-size:0.55rem}
+.app-stage.active{border-color:var(--cool)}
+.app-dot{width:100%;padding:0.35rem 0.5rem;background:rgba(255,255,255,0.03);border-radius:4px;font-size:0.68rem;color:var(--fg);margin-bottom:0.3rem;opacity:0;transform:translateY(5px);transition:all 0.4s}
+.app-dot.show{opacity:1;transform:translateY(0)}
+.app-dot .ad-name{font-weight:500}
+.app-dot .ad-time{font-size:0.55rem;color:var(--dim);margin-top:0.1rem}
+.chart-bars{display:flex;align-items:flex-end;gap:4px;height:120px;padding-top:1rem}
+.chart-bar{flex:1;background:var(--cool);border-radius:3px 3px 0 0;transition:height 1s cubic-bezier(0.4,0,0.2,1);height:0;position:relative;min-width:14px}
+.chart-bar:hover{background:var(--pop)}
+.chart-bar .cb-label{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:0.5rem;color:var(--dim);white-space:nowrap}
+.chart-bar .cb-val{position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-size:0.55rem;color:var(--cool);opacity:0;transition:opacity 0.3s}
+.chart-bar:hover .cb-val{opacity:1}
+.engage-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.8rem}
+.engage-card{background:var(--surface);border:1px solid var(--wire);border-radius:8px;padding:1rem;text-align:center;transition:all 0.3s}
+.engage-card:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-2px)}
+.engage-card .eg-num{font-family:Georgia,serif;font-size:1.8rem;color:var(--cool);margin-bottom:0.2rem}
+.engage-card .eg-lbl{font-size:0.6rem;color:var(--dim);letter-spacing:0.05em}
+.engage-card .eg-delta{font-size:0.6rem;color:var(--cool);margin-top:0.3rem}
+.engage-card .eg-delta.down{color:var(--pop)}
+.member-row{display:flex;align-items:center;gap:0.8rem;padding:0.6rem 0;border-bottom:1px solid var(--wire)}
+.member-row:last-child{border-bottom:none}
+.member-row .mr-avatar{width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--wire);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--dim);flex-shrink:0}
+.member-row .mr-info{flex:1}
+.member-row .mr-name{font-size:0.78rem;color:var(--fg)}
+.member-row .mr-role{font-size:0.6rem;color:var(--dim)}
+.member-row .mr-status{font-size:0.58rem;padding:0.2em 0.5em;border-radius:10px;border:1px solid var(--wire)}
+.member-row .mr-status.active{color:var(--cool);border-color:rgba(61,214,200,0.2)}
+.member-row .mr-status.inactive{color:var(--pop);border-color:rgba(255,87,51,0.2)}
+.rec-tag{display:inline-flex;align-items:center;gap:0.4em;padding:0.4em 0.9em;font-size:0.7rem;border-radius:20px;border:1px solid var(--wire);color:var(--dim);transition:all 0.3s}
+.rec-tag .rt-cat{font-size:0.55rem;letter-spacing:0.05em;text-transform:uppercase;opacity:0.6}
+.rec-tag.rt-vibe{background:rgba(61,214,200,0.06);border-color:rgba(61,214,200,0.2);color:var(--cool)}
+.rec-tag.rt-sched{background:rgba(255,87,51,0.06);border-color:rgba(255,87,51,0.15);color:var(--pop)}
+.rec-tag.rt-type{background:rgba(91,156,246,0.06);border-color:rgba(91,156,246,0.15);color:var(--blue)}
+.rec-tag.rt-cost{background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.1);color:var(--fg)}
+@media(max-width:900px){
+.l-split{grid-template-columns:1fr!important}
+.l-split .col.panel{background:none}
+h1{font-size:2.2rem}
+.thirds,.halves{grid-template-columns:1fr}
+.vs-block{grid-template-columns:1fr}
+.vs-divider{display:none}
+.onb-steps{flex-direction:column}
+.onb-arrow{transform:rotate(90deg)}
+.l-full,.l-center,.l-split .col,.l-top .band,.l-top .area{padding:2rem}
+body{cursor:auto}
+.cursor{display:none}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="blobs"><div class="blob b1"></div><div class="blob b2"></div></div>
+<div class="cursor" id="cursor"></div>
+<div class="nav">
+<button onclick="prev()">&larr;</button>
+<div class="dots" id="dots"></div>
+<button onclick="next()">&rarr;</button>
+</div>
+<div class="deck">
+
+<!-- 01: Title -->
+<div class="slide active">
+<div class="l-center">
+<h3 class="rv">A New Kind of University Tool</h3>
+<h1 class="rv" style="margin-top:0.5rem">Find where<br>you belong</h1>
+<p class="rv" style="margin-top:2rem;max-width:40ch;text-align:center">A platform where students discover clubs and events through intent — not keywords. And clubs get found by the right people, automatically.</p>
+<div class="rv" style="margin-top:2.5rem;display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:center">
+<span class="tag">Natural Language</span><span class="tag">Events</span><span class="tag">Club Profiles</span><span class="tag">Personalized Feed</span><span class="tag">Low Friction</span>
+</div>
+</div>
+</div>
+
+<!-- 02: The Problem -->
+<div class="slide">
+<div class="l-split">
+<div class="col panel">
+<h3 class="rv">The Problem</h3>
+<h2 class="rv">Discovery is<br>broken</h2>
+<div class="stat-grid rv" style="margin-top:1.5rem">
+<div class="stat-box"><div class="num">73%</div><div class="lbl">join &le;1 club</div></div>
+<div class="stat-box"><div class="num">45%</div><div class="lbl">quit within a month</div></div>
+<div class="stat-box"><div class="num">60%</div><div class="lbl">"couldn't find fit"</div></div>
+<div class="stat-box"><div class="num">5s</div><div class="lbl">before giving up</div></div>
+</div>
+<p class="rv" style="margin-top:1.5rem">The problem isn't too few clubs. It's that the right club exists and is invisible.</p>
+</div>
+<div class="col">
+<span class="badge badge-cust rv">Why It Fails</span>
+<div class="vs-block rv" style="max-width:100%">
+<div class="vs-side old" style="width:100%">
+<h4>Current Tools</h4>
+<ul>
+<li>Alphabetical list or keyword-only search</li>
+<li>"Chill hangout" returns 0 results</li>
+<li>No schedule, vibe, or cost filtering</li>
+<li>Popular clubs always on top</li>
+<li>No event discovery at all</li>
+<li>Student adapts to the system</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 03: Full-slide demo with specific club names -->
+<div class="slide">
+<div class="demo-full">
+<div class="phase-label" id="phase-label" style="color:var(--dim)"></div>
+<div class="search-bar" id="search-bar">
+<span style="opacity:0.4">&#x1F50D;</span>
+<span class="sb-text" id="search-text"></span>
+</div>
+<div class="results-area" id="results-area"></div>
+<button class="run-btn" onclick="fullDemoRun()" style="position:absolute;top:2rem;right:3rem">Start Experience</button>
+<button class="rst-btn" onclick="fullDemoReset()" style="position:absolute;top:2rem;right:12rem">Reset</button>
+</div>
+</div>
+
+<!-- 04: Two-Sided Platform -->
+<div class="slide">
+<div class="l-top">
+<div class="band">
+<h3 class="rv">Two-Sided Platform</h3>
+<h2 class="rv" style="margin-bottom:0.5rem">Students find better. Clubs get found.</h2>
+<p class="rv">Both sides benefit from the same system. No extra work for either.</p>
+</div>
+<div class="area">
+<div class="halves rv" style="width:100%">
+<div>
+<h4 style="font-size:0.75rem;color:var(--cool);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1rem">For Students</h4>
+<div class="benefit" style="margin-bottom:0.8rem"><h4>Speak naturally</h4><p>"Something social on weeknights" just works.</p></div>
+<div class="benefit" style="margin-bottom:0.8rem"><h4>5 results, not 200</h4><p>Every result is relevant. No scrolling.</p></div>
+<div class="benefit"><h4>Events too</h4><p>"What's happening this Thursday?" has its own answer.</p></div>
+</div>
+<div>
+<h4 style="font-size:0.75rem;color:var(--pop);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1rem">For Clubs</h4>
+<div class="benefit" style="margin-bottom:0.8rem"><h4>Get discovered passively</h4><p>No SEO. Just write your description naturally.</p></div>
+<div class="benefit" style="margin-bottom:0.8rem"><h4>Right people find you</h4><p>Intent-matched members stay longer.</p></div>
+<div class="benefit"><h4>Post events, get RSVPs</h4><p>Events surface when relevant to a student's search.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 05: Profile + Discovery -->
+<div class="slide">
+<div class="l-split">
+<div class="col">
+<span class="badge badge-cust rv">Student Experience</span>
+<h3 class="rv">Personalization</h3>
+<h2 class="rv">Profile shapes<br>results</h2>
+<p class="rv">Set tags during onboarding. They inform every search and feed without repeating yourself. Totally optional — search works without them.</p>
+<div class="profile-mock rv" style="margin-top:1.5rem">
+<h4>Your profile tags</h4>
+<div class="p-tags">
+<span class="p-tag vibe">Relaxed pace</span>
+<span class="p-tag vibe">Social</span>
+<span class="p-tag vibe">Drop-in friendly</span>
+<span class="p-tag interest">Music</span>
+<span class="p-tag interest">Art</span>
+<span class="p-tag interest">Board games</span>
+<span class="p-tag sched">Tue evenings</span>
+<span class="p-tag sched">Thu evenings</span>
+<span class="p-tag">Free only</span>
+</div>
+</div>
+</div>
+<div class="col panel" style="align-items:center">
+<div class="disc-mock rv" style="max-width:400px">
+<h4>Discovery feed</h4>
+<div class="filter-row">
+<span class="f-pill on">For you</span>
+<span class="f-pill">Evenings</span>
+<span class="f-pill">Free</span>
+<span class="f-pill">Creative</span>
+<span class="f-pill">Social</span>
+</div>
+<div class="d-card"><div><div class="dc-name">Cougar Board Game Society</div><div class="dc-meta">Tue 7pm &middot; Free &middot; Drop-in</div></div><div class="dc-fit">94%</div></div>
+<div class="d-card"><div><div class="dc-name">Film Buffs Collective</div><div class="dc-meta">Tue 8pm &middot; Free &middot; Social</div></div><div class="dc-fit">91%</div></div>
+<div class="d-card"><div><div class="dc-name">Campus Sketch Club</div><div class="dc-meta">Fri 6pm &middot; Free &middot; Creative</div></div><div class="dc-fit">86%</div></div>
+<div class="d-card"><div><div class="dc-name">Acoustic Nights Collective</div><div class="dc-meta">Tue/Thu 8pm &middot; Free &middot; Music</div></div><div class="dc-fit">83%</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 06: Events Discovery with specific names -->
+<div class="slide">
+<div class="l-split">
+<div class="col">
+<span class="badge badge-cust rv">Student Experience</span>
+<h3 class="rv">Events</h3>
+<h2 class="rv">What's happening<br>this week?</h2>
+<p class="rv">Events are a first-class surface — not buried inside club pages. Searchable by time, type, and fit.</p>
+<p class="rv" style="margin-top:1rem">"What's happening Thursday evening?" works as a query. So does browsing a curated feed of upcoming events.</p>
+</div>
+<div class="col panel">
+<div class="rv" style="display:flex;flex-direction:column;gap:0.8rem">
+<h4 style="font-size:0.7rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">This week</h4>
+<div class="event-card"><div class="ev-date">Tuesday 7pm</div><div class="ev-name">Settlers of Catan Tournament</div><div class="ev-club">Hosted by Cougar Board Game Society</div><span class="ev-tag">Drop-in</span></div>
+<div class="event-card"><div class="ev-date">Wednesday 6pm</div><div class="ev-name">Life Drawing Session</div><div class="ev-club">Hosted by Campus Sketch Club</div><span class="ev-tag">Creative</span></div>
+<div class="event-card"><div class="ev-date">Thursday 8pm</div><div class="ev-name">Open Mic &amp; Jam Night</div><div class="ev-club">Hosted by Acoustic Nights Collective</div><span class="ev-tag">Music</span></div>
+<div class="event-card"><div class="ev-date">Saturday 10am</div><div class="ev-name">Intramural Volleyball Pickup</div><div class="ev-club">Hosted by Weekend Rec League</div><span class="ev-tag">Active</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 07: Browse Feed -->
+<div class="slide">
+<div class="l-full">
+<span class="badge badge-cust rv" style="position:absolute;top:2rem;left:2rem">Browse Mode</span>
+<h3 class="rv">Alternative Discovery</h3>
+<h2 class="rv">Swipeable discovery feed</h2>
+<p class="rv" style="margin-bottom:2rem">For students who want to browse, not search. Curated for their profile. Scroll to explore.</p>
+<div class="hscroll rv">
+<div class="hcard"><h4>Cougar Board Game Society</h4><p>Open hangout every Tue at 7. Settlers, Codenames, whatever the table picks.</p><span class="hc-tag">Evenings</span></div>
+<div class="hcard"><h4>Wednesday Wind-Down</h4><p>Midweek board games and tea in the commons. Drop in any time after 5.</p><span class="hc-tag">Drop-in</span></div>
+<div class="hcard"><h4>Weekend Rec League</h4><p>Saturday morning pickup games — volleyball, soccer, frisbee. All skill levels.</p><span class="hc-tag">Active</span></div>
+<div class="hcard"><h4>Campus Sketch Club</h4><p>Open studio Fridays 6pm. Charcoal and supplies provided.</p><span class="hc-tag">Creative</span></div>
+<div class="hcard"><h4>Film Buffs Collective</h4><p>Weekly screening Tuesdays 8pm. We vote on the film. Popcorn provided.</p><span class="hc-tag">Social</span></div>
+<div class="hcard"><h4>Dawn Runners</h4><p>6:30am Mon/Wed/Fri. Any pace welcome. Coffee after at the student center.</p><span class="hc-tag">Early bird</span></div>
+<div class="hcard"><h4>Makers Workshop</h4><p>Thursday evenings. 3D printing, electronics, laser cutting projects.</p><span class="hc-tag">Hands-on</span></div>
+</div>
+<p style="font-size:0.68rem;color:var(--dim);margin-top:1rem">&larr; Scroll horizontally &rarr;</p>
+</div>
+</div>
+
+<!-- 08: Onboarding -->
+<div class="slide">
+<div class="l-full" style="align-items:center">
+<span class="badge badge-cust rv">Student Experience</span>
+<h3 class="rv">First Launch</h3>
+<h2 class="rv" style="text-align:center">30-second onboarding</h2>
+<p class="rv" style="text-align:center;margin-bottom:2.5rem">Three quick steps. Everything is optional. Students can skip straight to searching.</p>
+<div class="onb-steps rv">
+<div class="onb-step"><div class="step-num">1</div><h4>School email</h4><p>Verify you're a student. One click if SSO is available.</p></div>
+<span class="onb-arrow">&rarr;</span>
+<div class="onb-step"><div class="step-num">2</div><h4>Pick interests</h4><p>Tap tags that resonate: art, sports, social, music, etc.</p></div>
+<span class="onb-arrow">&rarr;</span>
+<div class="onb-step"><div class="step-num">3</div><h4>Set schedule</h4><p>Which evenings/weekends are you free? Optional but helps.</p></div>
+<span class="onb-arrow">&rarr;</span>
+<div class="onb-step"><div class="step-num">&check;</div><h4>Done</h4><p>Discovery feed is ready. Start browsing or search anything.</p></div>
+</div>
+</div>
+</div>
+
+<!-- 09: Club Owner View -->
+<div class="slide">
+<div class="l-split">
+<div class="col panel">
+<span class="badge badge-club rv">Club Owner</span>
+<h3 class="rv">Their Side</h3>
+<h2 class="rv">Club owners<br>manage everything</h2>
+<p class="rv">Claim your existing listing. Edit it. Post events. See who's interested. Zero cost, minimal effort.</p>
+<p class="rv" style="margin-top:1rem">Club descriptions are seeded from the university directory — owners just refine and add detail.</p>
+</div>
+<div class="col" style="align-items:center">
+<div class="dash-mock rv" style="max-width:380px">
+<h4>Cougar Board Game Society &mdash; Dashboard</h4>
+<div class="dash-stat"><span>Views this week</span><span class="ds-val">47</span></div>
+<div class="dash-stat"><span>Expressed interest</span><span class="ds-val">12</span></div>
+<div class="dash-stat"><span>Event RSVPs</span><span class="ds-val">8</span></div>
+<div class="dash-stat"><span>Members</span><span class="ds-val">23</span></div>
+<div class="dash-stat"><span>Match appearances</span><span class="ds-val">31 searches</span></div>
+<div style="margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--wire)">
+<h4 style="font-size:0.65rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.8rem">Club settings</h4>
+<div class="dash-stat"><span>Meeting time</span><span class="ds-val">Tue 7pm</span></div>
+<div class="dash-stat"><span>Cost</span><span class="ds-val">Free</span></div>
+<div class="dash-stat"><span>Application</span><span class="ds-val">Open (no app)</span></div>
+<div class="dash-stat"><span>Commitment</span><span class="ds-val">Drop-in</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 10: Recommended Tags for Club Owners -->
+<div class="slide">
+<div class="l-split">
+<div class="col">
+<span class="badge badge-club rv">Club Owner</span>
+<h3 class="rv">Discoverability</h3>
+<h2 class="rv">Recommended<br>tags</h2>
+<p class="rv">The system suggests tags based on your club description and activity. Add them in one click to appear in more relevant searches.</p>
+<p class="rv" style="margin-top:1rem">Tags are grouped by category: <span style="color:var(--cool)">vibe</span>, <span style="color:var(--pop)">schedule</span>, <span style="color:var(--blue)">type</span>, and <span style="color:var(--fg)">cost</span>. The more you add, the more precisely students match to your club.</p>
+<p class="rv" style="margin-top:1rem">Clubs that add recommended tags see <strong style="color:var(--cool)">3&times; more profile views</strong> and <strong style="color:var(--cool)">2&times; more RSVPs</strong> on average.</p>
+</div>
+<div class="col panel" style="align-items:center">
+<div class="rv" style="background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;width:100%;max-width:400px">
+<h4 style="font-size:0.7rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem">Cougar Board Game Society</h4>
+<div style="font-size:0.65rem;color:var(--dim);margin-bottom:1.2rem">Recommended tags based on your description &amp; events:</div>
+<div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem">
+<span class="rec-tag rt-vibe">Relaxed &middot; <span class="rt-cat">vibe</span></span>
+<span class="rec-tag rt-vibe">Social &middot; <span class="rt-cat">vibe</span></span>
+<span class="rec-tag rt-vibe">Drop-in friendly &middot; <span class="rt-cat">vibe</span></span>
+<span class="rec-tag rt-sched">Tue evenings &middot; <span class="rt-cat">schedule</span></span>
+<span class="rec-tag rt-sched">Weekly &middot; <span class="rt-cat">schedule</span></span>
+<span class="rec-tag rt-type">Board games &middot; <span class="rt-cat">type</span></span>
+<span class="rec-tag rt-type">Strategy games &middot; <span class="rt-cat">type</span></span>
+<span class="rec-tag rt-type">Party games &middot; <span class="rt-cat">type</span></span>
+<span class="rec-tag rt-cost">Free &middot; <span class="rt-cat">cost</span></span>
+<span class="rec-tag rt-type">Beginner friendly &middot; <span class="rt-cat">type</span></span>
+</div>
+<div style="font-size:0.65rem;color:var(--dim);border-top:1px solid var(--wire);padding-top:1rem;margin-bottom:0.6rem">Already applied:</div>
+<div style="display:flex;flex-wrap:wrap;gap:0.4rem">
+<span class="rec-tag rt-vibe" style="opacity:0.5">&#x2713; Social</span>
+<span class="rec-tag rt-sched" style="opacity:0.5">&#x2713; Tue evenings</span>
+<span class="rec-tag rt-cost" style="opacity:0.5">&#x2713; Free</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 11: Club Management Overview -->
+<div class="slide">
+<div class="l-top">
+<div class="band">
+<span class="badge badge-club rv">Club Management</span>
+<h2 class="rv" style="margin-bottom:0.5rem">Centralizing the pain</h2>
+<p class="rv">Clubs already juggle spreadsheets, group chats, and email chains. Give them one place to manage everything.</p>
+</div>
+<div class="area">
+<div class="thirds rv" style="width:100%">
+<div class="benefit tilt"><div class="glare"></div><h4>Applications</h4><p>Review applicants in a pipeline. Accept, waitlist, or decline with one click. No more Google Forms &rarr; email chains.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Attendance</h4><p>Track who shows up. See trends over time. Identify members drifting away before they ghost entirely.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Engagement</h4><p>Event RSVP rates, active vs passive members, growth trends. Data clubs never had access to before.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Member Roles</h4><p>Assign leads, officers, coordinators. Permission tiers for who can post events, edit the profile, or manage applicants.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Communications</h4><p>Announce to all members or specific cohorts. No more "did everyone see the GroupMe message?"</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Handoff</h4><p>When leadership changes semester-to-semester, everything stays. No more institutional knowledge lost in graduated inboxes.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 12: Application Pipeline Demo -->
+<div class="slide">
+<div class="l-split">
+<div class="col panel">
+<span class="badge badge-club rv">Club Management</span>
+<h3 class="rv">Applications</h3>
+<h2 class="rv">Pipeline view</h2>
+<p class="rv">Applicants flow through stages. Drag between columns, add notes, batch-accept. No spreadsheet required.</p>
+<p class="rv" style="margin-top:1rem">Click "Fill Pipeline" to see applicants populate the stages.</p>
+<button class="run-btn" onclick="pipelineDemoRun()" style="margin-top:1.5rem">Fill Pipeline</button>
+<button class="rst-btn" onclick="pipelineDemoReset()" style="margin-top:0.5rem">Reset</button>
+</div>
+<div class="col" style="align-items:center;overflow-x:auto">
+<div class="app-pipeline rv" id="app-pipeline">
+<div class="app-stage" id="ap-new"><h5>New <span class="count" id="ap-new-c">0</span></h5></div>
+<div class="app-stage" id="ap-review"><h5>In Review <span class="count" id="ap-review-c">0</span></h5></div>
+<div class="app-stage active" id="ap-accepted"><h5>Accepted <span class="count" id="ap-accepted-c">0</span></h5></div>
+<div class="app-stage" id="ap-waitlist"><h5>Waitlisted <span class="count" id="ap-waitlist-c">0</span></h5></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 13: Attendance + Engagement -->
+<div class="slide">
+<div class="l-split">
+<div class="col">
+<span class="badge badge-club rv">Club Management</span>
+<h3 class="rv">Attendance</h3>
+<h2 class="rv">Who shows up</h2>
+<p class="rv">Weekly attendance tracked automatically (check-in at events). Spot trends before they become problems.</p>
+<div style="margin-top:1.5rem;width:100%">
+<div style="font-size:0.6rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem">Last 8 weeks</div>
+<div class="chart-bars rv" id="att-chart">
+<div class="chart-bar" id="cb0"><span class="cb-label">W1</span><span class="cb-val">18</span></div>
+<div class="chart-bar" id="cb1"><span class="cb-label">W2</span><span class="cb-val">22</span></div>
+<div class="chart-bar" id="cb2"><span class="cb-label">W3</span><span class="cb-val">19</span></div>
+<div class="chart-bar" id="cb3"><span class="cb-label">W4</span><span class="cb-val">24</span></div>
+<div class="chart-bar" id="cb4"><span class="cb-label">W5</span><span class="cb-val">21</span></div>
+<div class="chart-bar" id="cb5"><span class="cb-label">W6</span><span class="cb-val">26</span></div>
+<div class="chart-bar" id="cb6"><span class="cb-label">W7</span><span class="cb-val">23</span></div>
+<div class="chart-bar" id="cb7"><span class="cb-label">W8</span><span class="cb-val">28</span></div>
+</div>
+<button class="run-btn" onclick="attChartRun()" style="margin-top:2rem">Show Data</button>
+</div>
+</div>
+<div class="col panel">
+<div class="rv">
+<div style="font-size:0.65rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Engagement metrics</div>
+<div class="engage-grid" id="engage-grid">
+<div class="engage-card"><div class="eg-num">28</div><div class="eg-lbl">Active members</div><div class="eg-delta">+4 this month</div></div>
+<div class="engage-card"><div class="eg-num">84%</div><div class="eg-lbl">RSVP rate</div><div class="eg-delta">+12% vs last month</div></div>
+<div class="engage-card"><div class="eg-num">6</div><div class="eg-lbl">Events this month</div><div class="eg-delta">+2 vs last month</div></div>
+<div class="engage-card"><div class="eg-num">3</div><div class="eg-lbl">At-risk members</div><div class="eg-delta down">missed 3+ weeks</div></div>
+<div class="engage-card"><div class="eg-num">92%</div><div class="eg-lbl">Retention rate</div><div class="eg-delta">+8% vs semester avg</div></div>
+<div class="engage-card"><div class="eg-num">4.2</div><div class="eg-lbl">Avg events/member</div><div class="eg-delta">+0.6 vs last month</div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 14: Member Management -->
+<div class="slide">
+<div class="l-split">
+<div class="col panel">
+<span class="badge badge-club rv">Club Management</span>
+<h3 class="rv">People</h3>
+<h2 class="rv">Member<br>management</h2>
+<p class="rv">See everyone at a glance. Roles, activity status, attendance streak. Identify who needs outreach and who's ready for leadership.</p>
+<p class="rv" style="margin-top:1rem">Clubs lose 45% of members to silent disengagement. This makes it visible <em>before</em> they leave.</p>
+</div>
+<div class="col">
+<div class="rv" style="background:var(--surface);border:1px solid var(--wire);border-radius:10px;padding:1.5rem;width:100%">
+<div style="font-size:0.65rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem">Cougar Board Game Society &mdash; 28 members</div>
+<div class="member-row"><div class="mr-avatar">JR</div><div class="mr-info"><div class="mr-name">Jamie R.</div><div class="mr-role">President &middot; 8/8 events attended</div></div><span class="mr-status active">Active</span></div>
+<div class="member-row"><div class="mr-avatar">SK</div><div class="mr-info"><div class="mr-name">Sam K.</div><div class="mr-role">Events Lead &middot; 7/8 events</div></div><span class="mr-status active">Active</span></div>
+<div class="member-row"><div class="mr-avatar">MJ</div><div class="mr-info"><div class="mr-name">Morgan J.</div><div class="mr-role">Member &middot; 6/8 events</div></div><span class="mr-status active">Active</span></div>
+<div class="member-row"><div class="mr-avatar">AL</div><div class="mr-info"><div class="mr-name">Alex L.</div><div class="mr-role">Member &middot; 4/8 events</div></div><span class="mr-status active">Active</span></div>
+<div class="member-row"><div class="mr-avatar">TP</div><div class="mr-info"><div class="mr-name">Taylor P.</div><div class="mr-role">Member &middot; 1/8 events</div></div><span class="mr-status inactive">At risk</span></div>
+<div class="member-row"><div class="mr-avatar">CW</div><div class="mr-info"><div class="mr-name">Casey W.</div><div class="mr-role">Member &middot; 0/8 events</div></div><span class="mr-status inactive">Inactive</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 15: Why this becomes default -->
+<div class="slide">
+<div class="l-center">
+<h3 class="rv">Positioning</h3>
+<h2 class="rv" style="text-align:center;margin-bottom:2rem">Why this becomes the default</h2>
+<div class="thirds rv" style="max-width:900px;width:100%;text-align:left">
+<div class="benefit tilt"><div class="glare"></div><h4>Lower friction than anything else</h4><p>Sign up in 30 seconds. Find a club in 2 minutes. RSVP in 1 click. Nothing existing is this fast.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Better results than manual browsing</h4><p>A system that understands "not too serious" beats scrolling a list. Students won't go back.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Network effects</h4><p>More students using it = more data on what works. More clubs updating = better descriptions. Both sides improve together.</p></div>
+</div>
+<p class="rv" style="margin-top:2.5rem;text-align:center;max-width:50ch">Existing services haven't improved in a decade. This is a generational upgrade using technology that just became cheap enough to run.</p>
+</div>
+</div>
+
+<!-- 16: Cost -->
+<div class="slide">
+<div class="l-split">
+<div class="col panel">
+<span class="badge badge-tech rv">Feasibility</span>
+<h3 class="rv">Economics</h3>
+<h2 class="rv">Under $5/month</h2>
+<p class="rv">Almost everything runs locally. The only external API call costs fractions of a cent per search.</p>
+<p class="rv" style="margin-top:1rem;color:var(--cool)">Scales to 10K+ daily searches for under $30/month. Embedding clubs is a one-time cost.</p>
+</div>
+<div class="col" style="align-items:center">
+<div class="dash-mock rv" style="max-width:380px">
+<h4>Monthly cost at 1,000 searches/day</h4>
+<div class="dash-stat"><span>Embedding model (local)</span><span class="ds-val" style="color:var(--cool)">$0</span></div>
+<div class="dash-stat"><span>Vector database (~500 clubs)</span><span class="ds-val" style="color:var(--cool)">$0</span></div>
+<div class="dash-stat"><span>Reranking (local)</span><span class="ds-val" style="color:var(--cool)">$0</span></div>
+<div class="dash-stat"><span>Query expansion (GPT-4o-mini)</span><span class="ds-val">~$3</span></div>
+<div class="dash-stat" style="border-top:2px solid var(--cool);border-bottom:none;margin-top:0.5rem;padding-top:0.8rem"><span style="font-weight:700">Total</span><span class="ds-val" style="color:var(--cool);font-weight:700;font-size:1rem">&lt; $5/mo</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- 17: Summary -->
+<div class="slide">
+<div class="l-center">
+<h2 class="rv" style="margin-bottom:2rem">The platform</h2>
+<div class="thirds rv" style="max-width:900px;width:100%;text-align:left">
+<div class="benefit tilt"><div class="glare"></div><h4>Students</h4><p>Search naturally. Get matched. Browse events. RSVP in one click. 2 minutes from sign-up to first result.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>Clubs</h4><p>Claim your listing. Add recommended tags. Post events. Get found by the right people without gaming keywords.</p></div>
+<div class="benefit tilt"><div class="glare"></div><h4>The system</h4><p>Understands intent. Respects constraints. Catches contradictions. Under $5/month to run. No existing tool does this.</p></div>
+</div>
+<p class="rv" style="margin-top:3rem;text-align:center;max-width:42ch;color:var(--fg);font-size:0.95rem">Not a better search box.<br>The place you go to find where you belong.</p>
+</div>
+</div>
+
+</div><!-- end deck -->
+
+<script>
+// Cursor
+var cur=document.getElementById('cursor'),curX=0,curY=0,tX=0,tY=0;
+document.addEventListener('mousemove',function(e){tX=e.clientX;tY=e.clientY;});
+function aCur(){curX+=(tX-curX)*0.15;curY+=(tY-curY)*0.15;cur.style.left=curX+'px';cur.style.top=curY+'px';requestAnimationFrame(aCur);}
+aCur();
+document.querySelectorAll('button,.tag,.benefit,.tilt,.run-btn,.rst-btn,.event-card,.hcard').forEach(function(el){
+  el.addEventListener('mouseenter',function(){cur.classList.add('hovering');});
+  el.addEventListener('mouseleave',function(){cur.classList.remove('hovering');});
+});
+
+// Tilt
+document.querySelectorAll('.tilt').forEach(function(c){
+  c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();var x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;c.style.transform='perspective(800px) rotateX('+((y-0.5)*-8)+'deg) rotateY('+((x-0.5)*8)+'deg)';c.style.setProperty('--mx',(x*100)+'%');c.style.setProperty('--my',(y*100)+'%');});
+  c.addEventListener('mouseleave',function(){c.style.transform='';});
+});
+
+// Reveals
+var rObs=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting)en.target.classList.add('vis');});},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(function(el){rObs.observe(el);});
+
+// Slides
+var slides=document.querySelectorAll('.slide'),total=slides.length,idx=0;
+var dotsEl=document.getElementById('dots');
+for(var i=0;i<total;i++){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.setAttribute('data-i',i);d.onclick=function(){go(parseInt(this.getAttribute('data-i')));};dotsEl.appendChild(d);}
+function go(n){if(n<0||n>=total||n===idx)return;slides[idx].classList.remove('active');idx=n;slides[idx].classList.add('active');var dots=document.querySelectorAll('.dot');for(var i=0;i<dots.length;i++)dots[i].classList.toggle('on',i===idx);slides[idx].querySelectorAll('.rv').forEach(function(el){rObs.observe(el);});}
+function next(){go(idx+1);}function prev(){go(idx-1);}
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();next();}if(e.key==='ArrowLeft'){e.preventDefault();prev();}});
+var touchX=0;document.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX;});document.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50){d<0?next():prev();}});
+
+// Helpers
+function delay(ms){return new Promise(function(r){setTimeout(r,ms);});}
+
+// Full-slide demo with specific club names
+function fullDemoReset(){
+  document.getElementById('search-text').innerHTML='';
+  document.getElementById('search-bar').classList.remove('typing');
+  document.getElementById('phase-label').textContent='';
+  document.getElementById('results-area').innerHTML='';
+}
+async function fullDemoRun(){
+  fullDemoReset();
+  var bar=document.getElementById('search-bar');
+  var text=document.getElementById('search-text');
+  var phase=document.getElementById('phase-label');
+  var results=document.getElementById('results-area');
+  var query='something social on tuesday evenings';
+
+  phase.textContent='TRADITIONAL SEARCH';phase.style.color='var(--pop)';
+  bar.classList.add('typing');
+  for(var i=0;i<query.length;i++){await delay(45);text.innerHTML=query.slice(0,i+1)+'<span class="blink"></span>';}
+  await delay(600);text.innerHTML=query;bar.classList.remove('typing');
+  await delay(500);
+  var noRes=document.createElement('div');
+  noRes.style.cssText='color:var(--pop);font-size:0.88rem;opacity:0;transition:opacity 0.5s;text-align:center;padding:2rem';
+  noRes.innerHTML='No clubs found matching "social"<br><span style="font-size:0.75rem;color:var(--dim);display:block;margin-top:0.5rem">Try browsing the full directory (218 clubs) or use different keywords.</span>';
+  results.appendChild(noRes);await delay(80);noRes.style.opacity='1';
+  await delay(2200);
+
+  noRes.style.opacity='0';await delay(400);results.innerHTML='';
+  phase.textContent='INTELLIGENT DISCOVERY';phase.style.color='var(--cool)';
+  bar.classList.add('typing');text.innerHTML=query+'<span class="blink"></span>';
+  await delay(800);
+  var understand=document.createElement('div');
+  understand.style.cssText='font-size:0.75rem;color:var(--dim);text-align:center;opacity:0;transition:opacity 0.5s;margin-bottom:1rem';
+  understand.innerHTML='Understanding: <span style="color:var(--cool)">social atmosphere</span> + <span style="color:var(--cool)">Tuesday</span> + <span style="color:var(--cool)">evenings</span> + <span style="color:var(--cool)">open/casual</span>';
+  results.appendChild(understand);await delay(80);understand.style.opacity='1';
+  await delay(1000);text.innerHTML=query;bar.classList.remove('typing');
+
+  var clubs=[
+    {name:'Cougar Board Game Society',desc:'Open hangout every Tue at 7. Settlers, Codenames, whatever the table picks. Student center 204.',match:'94%'},
+    {name:'Film Buffs Collective',desc:'Movie night every Tuesday 8pm. We vote on the film, you show up. Popcorn provided.',match:'89%'},
+    {name:'Acoustic Nights Collective',desc:'Tue/Thu 8pm. Not performers — just people who enjoy hearing live music together.',match:'82%'},
+  ];
+  for(var i=0;i<clubs.length;i++){
+    await delay(400);var c=clubs[i];
+    var card=document.createElement('div');card.className='club-card';
+    card.innerHTML='<div class="cc-info"><div class="cc-name">'+c.name+'</div><div class="cc-desc">'+c.desc+'</div></div><div class="cc-match">'+c.match+'</div>';
+    results.appendChild(card);await delay(50);card.classList.add('show');
+  }
+}
+
+// Application Pipeline Demo
+function pipelineDemoReset(){
+  ['ap-new','ap-review','ap-accepted','ap-waitlist'].forEach(function(id){
+    var el=document.getElementById(id);
+    var dots=el.querySelectorAll('.app-dot');dots.forEach(function(d){d.remove();});
+  });
+  ['ap-new-c','ap-review-c','ap-accepted-c','ap-waitlist-c'].forEach(function(id){document.getElementById(id).textContent='0';});
+}
+async function pipelineDemoRun(){
+  pipelineDemoReset();
+  var applicants=[
+    {stage:'ap-new',name:'Jordan M.',time:'Applied 2h ago'},
+    {stage:'ap-new',name:'Riley S.',time:'Applied 5h ago'},
+    {stage:'ap-new',name:'Casey T.',time:'Applied 1d ago'},
+    {stage:'ap-review',name:'Alex P.',time:'Under review'},
+    {stage:'ap-review',name:'Morgan K.',time:'Interview scheduled'},
+    {stage:'ap-accepted',name:'Sam L.',time:'Accepted today'},
+    {stage:'ap-accepted',name:'Jamie R.',time:'Accepted yesterday'},
+    {stage:'ap-accepted',name:'Drew H.',time:'Accepted 3d ago'},
+    {stage:'ap-waitlist',name:'Taylor B.',time:'Waitlisted (full)'},
+  ];
+  var counts={'ap-new':0,'ap-review':0,'ap-accepted':0,'ap-waitlist':0};
+  for(var i=0;i<applicants.length;i++){
+    await delay(250);
+    var a=applicants[i];
+    var dot=document.createElement('div');dot.className='app-dot';
+    dot.innerHTML='<div class="ad-name">'+a.name+'</div><div class="ad-time">'+a.time+'</div>';
+    document.getElementById(a.stage).appendChild(dot);
+    counts[a.stage]++;
+    document.getElementById(a.stage+'-c').textContent=counts[a.stage];
+    await delay(50);dot.classList.add('show');
+  }
+}
+
+// Attendance Chart
+function attChartRun(){
+  var heights=[64,78,68,85,75,92,82,100];
+  heights.forEach(function(h,i){
+    setTimeout(function(){document.getElementById('cb'+i).style.height=h+'%';},i*120);
+  });
+}
+</script>
+</body>
+</html>
+
