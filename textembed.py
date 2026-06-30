@@ -27,6 +27,7 @@ def embed_club(club):
         "description": club["description"],
         "url": club["url"],
         "email": club.get("email", "none"),
+        "phone": club.get("phone", "none"),
         "text": text,
         "vector": response.data[0].embedding,
     }

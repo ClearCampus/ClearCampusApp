@@ -29,6 +29,7 @@ def fetch_page(page, retries=3):
                     "description": desc_el.text.strip() if desc_el else "",
                     "url": str(link_el["href"]) if link_el else "",
                     "email": "none",
+                    "phone": "none",
                 })
             return page, results
         except Exception as e:
@@ -56,25 +57,29 @@ session.headers.update(HEADERS)
 
 url_to_club = {club["url"]: club for club in clubs if club["url"]}
 
-def fetch_email(url):
+def fetch_contact(url):
     try:
         detail = session.get(url, timeout=5)
         soup = BeautifulSoup(detail.text, "html.parser")
         mailto = soup.select_one("a[href^='mailto:']")
-        return url, str(mailto["href"]).replace("mailto:", "").strip() if mailto else "none"
+        tel = soup.select_one("a[href^='tel:']")
+        email = str(mailto["href"]).replace("mailto:", "").strip() if mailto else "none"
+        phone = str(tel["href"]).replace("tel:", "").strip() if tel else "none"
+        return url, email, phone
     except Exception as e:
         print(f"  Warning: could not fetch {url}: {e}")
-        return url, "none"
+        return url, "none", "none"
 
 total = len(url_to_club)
 done = 0
-print(f"Fetching emails from {total} detail pages ({WORKERS} workers)...")
+print(f"Fetching contact info from {total} detail pages ({WORKERS} workers)...")
 
 with ThreadPoolExecutor(max_workers=WORKERS) as executor:
-    futures = {executor.submit(fetch_email, url): url for url in url_to_club}
+    futures = {executor.submit(fetch_contact, url): url for url in url_to_club}
     for future in as_completed(futures):
-        url, email = future.result()
+        url, email, phone = future.result()
         url_to_club[url]["email"] = email
+        url_to_club[url]["phone"] = phone
         done += 1
         if done % 100 == 0 or done == total:
             print(f"  {done}/{total} detail pages done")
