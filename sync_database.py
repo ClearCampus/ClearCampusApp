@@ -2,6 +2,7 @@ import json
 import os
 import sys
 import time
+from datetime import datetime, timezone
 from dotenv import load_dotenv
 from pinecone import Pinecone, ServerlessSpec
 from google.cloud import firestore
@@ -127,20 +128,38 @@ clubs_collection = db.collection("clubs")
 existing_docs = {} if REBUILD else {doc.id: doc.to_dict() or {} for doc in clubs_collection.stream()}
 existing_doc_ids = set(existing_docs.keys())
 
-# A. Delete removed clubs (only if NOT doing a full rebuild, since rebuild already cleared it)
+# A. Flag removed clubs for pending deletion (do NOT hard-delete)
+PENDING_FILE = os.path.join(base_dir, "pending_deletion.json")
 if not REBUILD:
     removed_ids = existing_doc_ids - scraped_club_ids
     if removed_ids:
-        print(f"Deleting {len(removed_ids)} removed clubs from Firestore & Pinecone...")
-        for club_id in removed_ids:
-            # Delete from Firestore
-            clubs_collection.document(club_id).delete()
-            # Delete from Pinecone
-            try:
-                index.delete(ids=[club_id])
-            except Exception as e:
-                print(f"Warning: Failed to delete vector '{club_id}' from Pinecone: {e}")
-        print("Deletions complete.")
+        # Load existing pending list to avoid duplicates
+        if os.path.exists(PENDING_FILE):
+            with open(PENDING_FILE) as f:
+                pending = json.load(f)
+        else:
+            pending = []
+
+        already_pending = {entry["id"] for entry in pending}
+        newly_removed = removed_ids - already_pending
+        flagged_on = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+        if newly_removed:
+            print(f"{len(newly_removed)} clubs newly flagged for pending deletion...")
+            for club_id in newly_removed:
+                existing_data = existing_docs.get(club_id, {})
+                pending.append({
+                    "id": club_id,
+                    "name": existing_data.get("name", ""),
+                    "url": existing_data.get("url", ""),
+                    "flagged_on": flagged_on,
+                    "status": "pending",
+                })
+            with open(PENDING_FILE, "w") as f:
+                json.dump(pending, f, indent=2)
+            print(f"Flagged {len(newly_removed)} clubs in pending_deletion.json (not deleted from DB).")
+        else:
+            print(f"{len(removed_ids)} clubs already flagged — no new entries.")
     else:
         print("No clubs removed.")
 
