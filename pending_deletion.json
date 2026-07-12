@@ -152,5 +152,82 @@
     "url": "https://getinvolved.tamu.edu/org/beso",
     "flagged_on": "2026-07-05",
     "status": "pending"
+  },
+  {
+    "id": "3291",
+    "name": "Phi Kappa Theta",
+    "url": "https://getinvolved.tamu.edu/org/3291",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "faim",
+    "name": "Freshman Aggies in Medicine",
+    "url": "https://getinvolved.tamu.edu/org/faim",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "esports",
+    "name": "A&M Esports",
+    "url": "https://getinvolved.tamu.edu/org/esports",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "aees",
+    "name": "Association of Environmental Engineering Students",
+    "url": "https://getinvolved.tamu.edu/org/aees",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "3288",
+    "name": "National Alliance of Mental Illness at Texas A&M",
+    "url": "https://getinvolved.tamu.edu/org/3288",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "aggiescare",
+    "name": "Aggies Cancer Advocacy, Research, and Equality",
+    "url": "https://getinvolved.tamu.edu/org/aggiescare",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "3270",
+    "name": "A&M Campus Fellowship",
+    "url": "https://getinvolved.tamu.edu/org/3270",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "somtech",
+    "name": "The Society of Mechatronics Engineering Technology",
+    "url": "https://getinvolved.tamu.edu/org/somtech",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "iicpd",
+    "name": "International Institute for Culture and Performing Arts Development",
+    "url": "https://getinvolved.tamu.edu/org/iicpd",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "1205",
+    "name": "Texas A&M Student Chapter of Heifer International",
+    "url": "https://getinvolved.tamu.edu/org/1205",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
+  },
+  {
+    "id": "steel",
+    "name": "Society of Technological Evolution and Engineering Leadership",
+    "url": "https://getinvolved.tamu.edu/org/steel",
+    "flagged_on": "2026-07-12",
+    "status": "pending"
   }
 ]
