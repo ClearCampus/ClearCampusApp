@@ -229,5 +229,138 @@
     "url": "https://getinvolved.tamu.edu/org/steel",
     "flagged_on": "2026-07-12",
     "status": "pending"
+  },
+  {
+    "id": "bits",
+    "name": "Business Information Technology Students",
+    "url": "https://getinvolved.tamu.edu/org/bits",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "aph",
+    "name": "Aggies Pursuing Healthcare",
+    "url": "https://getinvolved.tamu.edu/org/aph",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "1007",
+    "name": "Texas A&M Health Science Center - College of Nursing Class Council",
+    "url": "https://getinvolved.tamu.edu/org/1007",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "smac",
+    "name": "Student Mobility Advocacy Coalition",
+    "url": "https://getinvolved.tamu.edu/org/smac",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "white-creek-apartments",
+    "name": "White Creek Community Council",
+    "url": "https://getinvolved.tamu.edu/org/white-creek-apartments",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "sacnas",
+    "name": "Texas A&M University SACNAS Chapter",
+    "url": "https://getinvolved.tamu.edu/org/sacnas",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "gi",
+    "name": "Texas A&M University Chapter of Geo-Institute",
+    "url": "https://getinvolved.tamu.edu/org/gi",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "afht",
+    "name": "Aggies Fighting Human Trafficking",
+    "url": "https://getinvolved.tamu.edu/org/afht",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "msc-assessments",
+    "name": "MSC Assessments",
+    "url": "https://getinvolved.tamu.edu/org/msc-assessments",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "sla",
+    "name": "Sri Lanka Association",
+    "url": "https://getinvolved.tamu.edu/org/sla",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "1258",
+    "name": "EnMED Health Innovations",
+    "url": "https://getinvolved.tamu.edu/org/1258",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "hart-hall",
+    "name": "Hart Community Council",
+    "url": "https://getinvolved.tamu.edu/org/hart-hall",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "3306",
+    "name": "Project Yellow TAMU",
+    "url": "https://getinvolved.tamu.edu/org/3306",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "3225",
+    "name": "TAMUG Sea Aggie Orchestra",
+    "url": "https://getinvolved.tamu.edu/org/3225",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "replant",
+    "name": "Aggie Replant",
+    "url": "https://getinvolved.tamu.edu/org/replant",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "tls",
+    "name": "Tax Law Society",
+    "url": "https://getinvolved.tamu.edu/org/tls",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "paintball",
+    "name": "Texas A&M University Paintball Club",
+    "url": "https://getinvolved.tamu.edu/org/paintball",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "rjcf",
+    "name": "ReJOYce In Jesus Campus Fellowship",
+    "url": "https://getinvolved.tamu.edu/org/rjcf",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
+  },
+  {
+    "id": "frugal",
+    "name": "Finding Resources for Underprivileged Groups in Aggieland",
+    "url": "https://getinvolved.tamu.edu/org/frugal",
+    "flagged_on": "2026-07-19",
+    "status": "pending"
   }
 ]
