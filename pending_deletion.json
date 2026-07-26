@@ -362,5 +362,96 @@
     "url": "https://getinvolved.tamu.edu/org/frugal",
     "flagged_on": "2026-07-19",
     "status": "pending"
+  },
+  {
+    "id": "sigma-lambda-chi",
+    "name": "Sigma Lambda Chi",
+    "url": "https://getinvolved.tamu.edu/org/sigma-lambda-chi",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "ihi",
+    "name": "Institute for Healthcare Improvement Open School of Health Professions (Texas A&M University, School of Public Health)",
+    "url": "https://getinvolved.tamu.edu/org/ihi",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "suits",
+    "name": "SUITS",
+    "url": "https://getinvolved.tamu.edu/org/suits",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "ostem",
+    "name": "oSTEM at Texas A&M",
+    "url": "https://getinvolved.tamu.edu/org/ostem",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "deaf",
+    "name": "Deaf Aggies & Friends",
+    "url": "https://getinvolved.tamu.edu/org/deaf",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "1st-regiment",
+    "name": "1st Regiment",
+    "url": "https://getinvolved.tamu.edu/org/1st-regiment",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "clements-hall",
+    "name": "Clements Community Council",
+    "url": "https://getinvolved.tamu.edu/org/clements-hall",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "hobby-hall",
+    "name": "Hobby Community Council",
+    "url": "https://getinvolved.tamu.edu/org/hobby-hall",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "act",
+    "name": "TAMU Chapter of the Agricultural Communicators of Tomorrow",
+    "url": "https://getinvolved.tamu.edu/org/act",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "schuhmacher-hall",
+    "name": "Schuhmacher Community Council",
+    "url": "https://getinvolved.tamu.edu/org/schuhmacher-hall",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "lsf",
+    "name": "Lutheran Student Fellowship",
+    "url": "https://getinvolved.tamu.edu/org/lsf",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "acc",
+    "name": "Aggie Cricket Club",
+    "url": "https://getinvolved.tamu.edu/org/acc",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
+  },
+  {
+    "id": "appelt-hall",
+    "name": "Appelt Community Council",
+    "url": "https://getinvolved.tamu.edu/org/appelt-hall",
+    "flagged_on": "2026-07-26",
+    "status": "pending"
   }
 ]
