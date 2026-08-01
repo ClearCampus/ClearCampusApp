@@ -498,9 +498,10 @@ export default function () {
 
         <Tabs orientation="vertical" defaultSelectedKey="kpis" className="w-full items-start">
           <Tabs.ListContainer className="shrink-0">
-            <Tabs.List className="w-40">
-              <Tabs.Tab id="kpis">KPIs</Tabs.Tab>
-              <Tabs.Tab id="edit">Editing</Tabs.Tab>
+            <Tabs.List className="w-48">
+              <Tabs.Tab id="kpis">KPIs & Performance</Tabs.Tab>
+              <div className="h-px bg-default-200 my-2" />
+              <Tabs.Tab id="edit">Edit Profile & Page</Tabs.Tab>
             </Tabs.List>
           </Tabs.ListContainer>
 

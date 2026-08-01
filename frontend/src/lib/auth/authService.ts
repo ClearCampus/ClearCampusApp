@@ -1,4 +1,9 @@
-import { randomId } from "../id";
+import { auth } from "./firebase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import type {
   LoginParams,
   Session,
@@ -7,26 +12,8 @@ import type {
   UserRole,
 } from "./types";
 
-/**
- * Mock auth backend — the ONLY file in the app that touches cookies or
- * knows how a session is stored.
- *
- * Every exported function here has the shape a real backend call would
- * have (async, throws on failure, returns/reads a `Session`). When a real
- * API exists, swap the bodies for `fetch("/api/auth/...", { credentials:
- * "include" })` calls that let the server set a real httpOnly cookie —
- * nothing outside this file (AuthContext, pages, components) should need
- * to change.
- *
- * A browser can't set an httpOnly cookie from client JS, so today the
- * "server-side cookie" is simulated with a plain, readable cookie holding
- * a session id. The mock "user directory" below stands in for a real
- * users table and should be deleted entirely once a backend exists.
- */
-
 const SESSION_COOKIE = "cc_session";
-const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days — mirrors a refresh-token lifetime
-const USER_DIRECTORY_KEY = "cc_mock_user_directory";
+const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * 7; // 7 days
 
 function readCookie(name: string): string | null {
   const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
@@ -41,33 +28,41 @@ function clearCookie(name: string) {
   document.cookie = `${name}=; path=/; max-age=0`;
 }
 
-interface DirectoryEntry {
-  name: string;
-  role: UserRole;
-  clubSlug?: string;
-}
+async function verifyWithBackend(token: string, fallbackName: string, claimClubId?: string): Promise<SessionUser> {
+  const baseUrl = import.meta.env.VITE_API_URL || "";
+  const res = await fetch(`${baseUrl}/api/auth/verify`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    },
+    body: claimClubId ? JSON.stringify({ claim_club_id: claimClubId }) : undefined,
+  });
 
-function readDirectory(): Record<string, DirectoryEntry> {
-  try {
-    return JSON.parse(localStorage.getItem(USER_DIRECTORY_KEY) ?? "{}");
-  } catch {
-    return {};
+  if (!res.ok) {
+    const errorText = await res.text();
+    throw new Error(errorText || "Verification with backend failed.");
   }
-}
 
-function writeDirectory(directory: Record<string, DirectoryEntry>) {
-  localStorage.setItem(USER_DIRECTORY_KEY, JSON.stringify(directory));
-}
-
-function persistSession(user: SessionUser): Session {
-  const session: Session = {
-    accessToken: randomId("access"),
-    refreshToken: randomId("refresh"),
-    user,
-    expiresAt: Date.now() + SESSION_TTL_MS,
-  };
-  writeCookie(SESSION_COOKIE, JSON.stringify(session), SESSION_TTL_MS);
-  return session;
+  const profile = await res.json();
+  const role: UserRole = profile.role === "owner" ? "club" : "student";
+  
+  if (role === "club") {
+    return {
+      id: profile.uid,
+      email: profile.email,
+      name: fallbackName || profile.email.split("@")[0],
+      role: "club",
+      clubSlug: profile.owned_clubs?.[0] || "",
+    };
+  } else {
+    return {
+      id: profile.uid,
+      email: profile.email,
+      name: fallbackName || profile.email.split("@")[0],
+      role: "student",
+    };
+  }
 }
 
 export const authService = {
@@ -76,44 +71,70 @@ export const authService = {
       throw new Error("Email and password are required.");
     }
 
-    const directory = readDirectory();
-    const existing = directory[email];
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const token = await user.getIdToken();
+      
+      const sessionUser = await verifyWithBackend(token, "");
+      
+      const session: Session = {
+        accessToken: token,
+        refreshToken: user.refreshToken,
+        user: sessionUser,
+        expiresAt: Date.now() + SESSION_TTL_MS,
+      };
 
-    const user: SessionUser = existing
-      ? existing.role === "club"
-        ? { id: randomId("user"), role: "club", email, name: existing.name, clubSlug: existing.clubSlug! }
-        : { id: randomId("user"), role: "student", email, name: existing.name }
-      : { id: randomId("user"), role: "student", email, name: email.split("@")[0] };
-
-    if (!existing) {
-      directory[email] = { name: user.name, role: "student" };
-      writeDirectory(directory);
+      writeCookie(SESSION_COOKIE, JSON.stringify(session), SESSION_TTL_MS);
+      return session;
+    } catch (err: any) {
+      console.error("Firebase/Backend Login error:", err);
+      throw new Error(err.message || "Failed to log in.");
     }
-
-    return persistSession(user);
   },
 
-  async signup({ email, password, name, role, clubSlug }: SignupParams): Promise<Session> {
+  async signup({ email, password, name, clubSlug }: SignupParams): Promise<Session> {
     if (!email || !password || !name) {
       throw new Error("Name, email, and password are required.");
     }
-    if (role === "club" && !clubSlug) {
-      throw new Error("Select the club you're claiming.");
+
+    let user: any = null;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      user = userCredential.user;
+      const token = await user.getIdToken();
+
+      const sessionUser = await verifyWithBackend(token, name, clubSlug);
+
+      const session: Session = {
+        accessToken: token,
+        refreshToken: user.refreshToken,
+        user: sessionUser,
+        expiresAt: Date.now() + SESSION_TTL_MS,
+      };
+
+      writeCookie(SESSION_COOKIE, JSON.stringify(session), SESSION_TTL_MS);
+      return session;
+    } catch (err: any) {
+      console.error("Firebase/Backend Signup error:", err);
+      if (user) {
+        try {
+          await user.delete();
+          console.log("Cleaned up Firebase user account after backend verification failure.");
+        } catch (deleteErr) {
+          console.error("Failed to delete Firebase user account during cleanup:", deleteErr);
+        }
+      }
+      throw new Error(err.message || "Failed to sign up.");
     }
-
-    const directory = readDirectory();
-    directory[email] = { name, role, clubSlug };
-    writeDirectory(directory);
-
-    const user: SessionUser =
-      role === "club"
-        ? { id: randomId("user"), role: "club", email, name, clubSlug: clubSlug! }
-        : { id: randomId("user"), role: "student", email, name };
-
-    return persistSession(user);
   },
 
   async logout(): Promise<void> {
+    try {
+      await signOut(auth);
+    } catch (err) {
+      console.error("Firebase signout error:", err);
+    }
     clearCookie(SESSION_COOKIE);
   },
 
@@ -132,10 +153,28 @@ export const authService = {
     }
   },
 
-  /** Simulates exchanging a refresh token for a new access token. */
   async refresh(): Promise<Session | null> {
     const session = authService.getSession();
     if (!session) return null;
-    return persistSession(session.user);
+    
+    const user = auth.currentUser;
+    if (user) {
+      try {
+        const token = await user.getIdToken(true);
+        const nextUser = await verifyWithBackend(token, session.user.name);
+        const nextSession: Session = {
+          accessToken: token,
+          refreshToken: user.refreshToken,
+          user: nextUser,
+          expiresAt: Date.now() + SESSION_TTL_MS,
+        };
+        writeCookie(SESSION_COOKIE, JSON.stringify(nextSession), SESSION_TTL_MS);
+        return nextSession;
+      } catch (e) {
+        console.error("Token refresh failed:", e);
+        return null;
+      }
+    }
+    return null;
   },
 };

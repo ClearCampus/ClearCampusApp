@@ -1,4 +1,4 @@
-import { Button, Card, Chip } from "@heroui/react";
+import { Button, Card, Chip, Link } from "@heroui/react";
 import { ExternalLinkIcon } from "lucide-react";
 import { motion, type Variants } from "motion/react";
 import SaveButton from "./SaveButton";
@@ -73,10 +73,12 @@ function EventCard({ id, title, description, imageSrc, tags }: EventCardProps & 
                 </Chip>
               ))}
             </div>
-            <Button className="w-full sm:w-auto">
-              See More
-              <ExternalLinkIcon />
-            </Button>
+            <Link href={`/club/${id}`} className="w-full sm:w-auto">
+              <Button className="w-full">
+                See More
+                <ExternalLinkIcon />
+              </Button>
+            </Link>
           </Card.Footer>
         </div>
       </Card>

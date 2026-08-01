@@ -6,4 +6,13 @@ import Pages from 'vite-plugin-pages';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss(), Pages()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+      }
+    }
+  }
 })
+
