@@ -43,8 +43,9 @@ export function ClubDataProvider({ children }: { children: ReactNode }) {
   // Fetch all clubs from backend on mount
   useEffect(() => {
     async function fetchClubs() {
+      const baseUrl = import.meta.env.VITE_API_URL || "";
       try {
-        const res = await fetch("/api/clubs");
+        const res = await fetch(`${baseUrl}/api/clubs`);
         if (res.ok) {
           const data = await res.json();
           setClubs(data);
@@ -76,7 +77,8 @@ export function ClubDataProvider({ children }: { children: ReactNode }) {
       const session = authService.getSession();
       const token = session?.accessToken;
       try {
-        await fetch(`/api/clubs/${slug}`, {
+        const baseUrl = import.meta.env.VITE_API_URL || "";
+        await fetch(`${baseUrl}/api/clubs/${slug}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -101,7 +103,8 @@ export function ClubDataProvider({ children }: { children: ReactNode }) {
       const session = authService.getSession();
       const token = session?.accessToken;
       try {
-        await fetch(`/api/clubs/${slug}/page`, {
+        const baseUrl = import.meta.env.VITE_API_URL || "";
+        await fetch(`${baseUrl}/api/clubs/${slug}/page`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

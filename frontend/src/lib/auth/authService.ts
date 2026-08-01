@@ -29,7 +29,8 @@ function clearCookie(name: string) {
 }
 
 async function verifyWithBackend(token: string, fallbackName: string, claimClubId?: string): Promise<SessionUser> {
-  const res = await fetch("/api/auth/verify", {
+  const baseUrl = import.meta.env.VITE_API_URL || "";
+  const res = await fetch(`${baseUrl}/api/auth/verify`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
