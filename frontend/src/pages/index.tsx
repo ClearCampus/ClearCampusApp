@@ -12,7 +12,8 @@ export default function () {
       <RainbowInput
         onSearch={async (query) => {
           try {
-            const res = await fetch(`/api/clubs/search?query=${encodeURIComponent(query)}`);
+            const baseUrl = import.meta.env.VITE_API_URL || "";
+            const res = await fetch(`${baseUrl}/api/clubs/search?query=${encodeURIComponent(query)}`);
             if (res.ok) {
               const data = await res.json();
               const mapped = data.map((club: any) => ({
