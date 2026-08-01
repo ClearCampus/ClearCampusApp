@@ -29,6 +29,7 @@ export interface ClubData {
   description: string;
   /** Nullable: clubs that haven't opted into in-app applications yet show no Apply button. */
   applicationsOpen: boolean;
+  claimed?: boolean;
   events: ClubEventEntry[];
   content: ContentBlock[];
 }

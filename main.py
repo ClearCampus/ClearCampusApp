@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from google.cloud import firestore
 import firebase_client
-from routers import auth
+from routers import auth, clubs
 
 app = FastAPI(
     title="Clear Campus API",
@@ -11,6 +11,8 @@ app = FastAPI(
 
 # Include Routers
 app.include_router(auth.router)
+app.include_router(clubs.router)
+
 
 @app.get("/health")
 def health_check() -> dict:

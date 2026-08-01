@@ -1,5 +1,5 @@
 import { Button, FieldError, Form, Input, Label, Link, TextField } from "@heroui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import PageWrapper from "../components/PageWrapper";
 import { useAuth } from "../lib/auth/AuthContext";
@@ -34,13 +34,22 @@ export default function () {
   const { clubs } = useClubData();
   const navigate = useNavigate();
 
+  const claimableClubs = clubs.filter((c) => !c.claimed);
+
   const [role, setRole] = useState<UserRole>("student");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [clubSlug, setClubSlug] = useState(clubs[0]?.slug ?? "");
+  const [clubSlug, setClubSlug] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Set default clubSlug when claimable clubs load
+  useEffect(() => {
+    if (claimableClubs.length > 0 && !clubSlug) {
+      setClubSlug(claimableClubs[0].slug);
+    }
+  }, [claimableClubs, clubSlug]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -131,10 +140,10 @@ export default function () {
                 name="clubSlug"
                 value={clubSlug}
                 onChange={(e) => setClubSlug(e.target.value)}
-                className="w-full h-10 px-3 rounded-lg bg-default-100 border border-default-200 text-sm"
+                className="w-full h-10 px-3 rounded-lg bg-[#18181b] text-white border border-[#27272a] text-sm"
               >
-                {clubs.map((club) => (
-                  <option key={club.slug} value={club.slug}>
+                {claimableClubs.map((club) => (
+                  <option key={club.slug} value={club.slug} className="bg-[#18181b] text-white">
                     {club.name}
                   </option>
                 ))}
