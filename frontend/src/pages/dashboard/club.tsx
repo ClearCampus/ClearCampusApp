@@ -20,6 +20,7 @@ import { useClubData } from "../../lib/data/ClubDataContext";
 import { eventKey, type ClubEventEntry, type ContentBlock } from "../../lib/data/clubs";
 import { getPageViews } from "../../lib/data/clubStats";
 import { getRsvpCount } from "../../lib/data/rsvpStore";
+import { useMediaQuery } from "../../lib/useMediaQuery";
 
 // --- Helpers ---
 
@@ -377,8 +378,8 @@ function EditTab({ clubSlug }: { clubSlug: string }) {
                 className="w-full min-h-16 px-3 py-2 rounded-lg bg-default-100 border border-default-200 text-sm"
               />
 
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs text-default-500">Visibility</span>
                   <Button
                     size="sm"
@@ -395,7 +396,7 @@ function EditTab({ clubSlug }: { clubSlug: string }) {
                     Members Only
                   </Button>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="text-xs text-default-500">Fee ($, blank = free)</span>
                   <input
                     type="number"
@@ -417,9 +418,9 @@ function EditTab({ clubSlug }: { clubSlug: string }) {
 
       {/* Content blocks */}
       <section className="flex flex-col gap-4 pb-8">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-xl font-semibold">Page Content</h2>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <Button
               size="sm"
               variant="outline"
@@ -475,6 +476,7 @@ export default function () {
   const { session, isLoading } = useAuth();
   const navigate = useNavigate();
   const { getClub } = useClubData();
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     if (isLoading) return;
@@ -493,22 +495,26 @@ export default function () {
           <p className="text-sm font-medium tracking-widest uppercase text-default-500">
             Club Dashboard
           </p>
-          <h1 className="text-3xl font-semibold">{club?.name ?? "Your Club"}</h1>
+          <h1 className="text-2xl sm:text-3xl font-semibold">{club?.name ?? "Your Club"}</h1>
         </div>
 
-        <Tabs orientation="vertical" defaultSelectedKey="kpis" className="w-full items-start">
-          <Tabs.ListContainer className="shrink-0">
-            <Tabs.List className="w-48">
+        <Tabs
+          orientation={isMobile ? "horizontal" : "vertical"}
+          defaultSelectedKey="kpis"
+          className="w-full items-start"
+        >
+          <Tabs.ListContainer className="shrink-0 w-full md:w-auto">
+            <Tabs.List className="w-full md:w-48">
               <Tabs.Tab id="kpis">KPIs & Performance</Tabs.Tab>
-              <div className="h-px bg-default-200 my-2" />
+              <div className="hidden md:block h-px bg-default-200 my-2" />
               <Tabs.Tab id="edit">Edit Profile & Page</Tabs.Tab>
             </Tabs.List>
           </Tabs.ListContainer>
 
-          <Tabs.Panel id="kpis" className="flex-1 min-w-0">
+          <Tabs.Panel id="kpis" className="flex-1 min-w-0 w-full">
             {club && <KpiTab clubSlug={club.slug} events={club.events} />}
           </Tabs.Panel>
-          <Tabs.Panel id="edit" className="flex-1 min-w-0">
+          <Tabs.Panel id="edit" className="flex-1 min-w-0 w-full">
             {club && <EditTab clubSlug={club.slug} />}
           </Tabs.Panel>
         </Tabs>

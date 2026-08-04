@@ -93,6 +93,29 @@ interface RainbowInputProps {
   onSearch: (query: string) => void;
 }
 
+function SearchButton({
+  isSearching,
+  onPress,
+  className,
+}: {
+  isSearching: boolean;
+  onPress: () => void;
+  className?: string;
+}) {
+  return (
+    <Button slot={null} isPending={isSearching} size="lg" className={className} onPress={onPress}>
+      {isSearching ? (
+        <Spinner color="current" size="sm" />
+      ) : (
+        <div className="w-4">
+          <SearchIcon />
+        </div>
+      )}
+      Search
+    </Button>
+  );
+}
+
 export default function (props: RainbowInputProps) {
   const placeholder = useTypewriterPlaceholder(PLACEHOLDERS);
 
@@ -108,17 +131,17 @@ export default function (props: RainbowInputProps) {
   }
 
   return (
-    <div className="w-full flex flex-row gap-4">
+    <div className="w-full flex flex-col gap-3 sm:flex-row sm:gap-4">
       <SearchField
         aria-label="Search"
         name="search"
-        className="grow"
+        className="w-full sm:grow"
         value={query}
         onChange={(search) => setQuery(search)}
       >
         <SearchField.Group
           className={cn(
-            "relative flex items-center gap-2 px-3 h-9",
+            "relative flex items-center gap-2 px-3 h-11 sm:h-9",
             "lg:h-16",
             "transition-all",
             "bg-[linear-gradient(var(--surface),var(--surface)),linear-gradient(var(--surface)_85%,rgba(18,18,19,0.6)_80%,rgba(18,18,19,0)),linear-gradient(90deg,var(--color-1),var(--color-1))]",
@@ -143,24 +166,20 @@ export default function (props: RainbowInputProps) {
             className="flex-1 lg:text-2xl bg-transparent outline-none placeholder:text-muted"
           />
           <SearchField.ClearButton className="shrink-0" />
-          <Filters />
-          <Button
-            slot={null}
-            isPending={isSearching}
-            size="lg"
-            onPress={search}
-          >
-            {isSearching ? (
-              <Spinner color="current" size="sm" />
-            ) : (
-              <div className="w-4">
-                <SearchIcon />
-              </div>
-            )}
-            Search
-          </Button>
+
+          {/* Desktop: filters + search inline in the same pill */}
+          <div className="hidden sm:flex items-center gap-2">
+            <Filters />
+            <SearchButton isSearching={isSearching} onPress={search} className="px-4" />
+          </div>
         </SearchField.Group>
       </SearchField>
+
+      {/* Mobile: filters + search as a full-width button row below the input */}
+      <div className="flex sm:hidden items-center gap-3">
+        <Filters className="flex-1 justify-center" />
+        <SearchButton isSearching={isSearching} onPress={search} className="flex-1 justify-center" />
+      </div>
     </div>
   );
 }

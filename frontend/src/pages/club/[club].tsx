@@ -145,15 +145,15 @@ export default function () {
         </Link>
 
         {/* Club header */}
-        <div className="flex items-start gap-5">
+        <div className="flex items-start gap-4 sm:gap-5">
           <img
             src={data.logo}
             alt={data.name}
-            className="w-16 h-16 rounded-2xl object-cover shrink-0 border border-default-200"
+            className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl object-cover shrink-0 border border-default-200"
           />
-          <div className="flex flex-col gap-1 flex-1">
-            <div className="flex items-start justify-between gap-4">
-              <h1 className="text-3xl font-semibold">{data.name}</h1>
+          <div className="flex flex-col gap-1 flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-4 flex-wrap">
+              <h1 className="text-2xl sm:text-3xl font-semibold wrap-break-word">{data.name}</h1>
               <SaveButton kind="club" id={data.slug} />
             </div>
             <p className="text-default-500 leading-relaxed">{data.description}</p>

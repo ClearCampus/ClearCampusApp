@@ -11,7 +11,7 @@ export function ScreenWindowOverlay({
   borderRadius = 16,
   padding = 24,
   topInset,
-  borderColor = "#222",
+  borderColor = "#ffffff",
 }: ScreenWindowOverlayProps) {
   const [size, setSize] = useState({ width: 0, height: 0 });
 

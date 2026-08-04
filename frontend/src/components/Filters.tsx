@@ -2,11 +2,16 @@ import {
   Accordion,
   Button,
   ButtonGroup,
+  cn,
   Dropdown,
   Slider,
 } from "@heroui/react";
 import { ChevronDown, ListFilterIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+
+interface FiltersProps {
+  className?: string;
+}
 
 interface MultiSelectFilterProps {
   options: string[];
@@ -44,7 +49,7 @@ function MultiSelectFilter(props: MultiSelectFilterProps) {
   );
 }
 
-export default function () {
+export default function Filters({ className }: FiltersProps) {
   const [timeCommitment, setTimeCommitment] = useState<number[]>([0, 1, 2]);
   const [feeCost, setFeeCost] = useState<number>(500);
   const [meetingType, setMeetingType] = useState<number[]>([0, 1, 2, 3]);
@@ -104,9 +109,10 @@ export default function () {
   return (
     <Dropdown>
       <Button
-        aria-label="Menu"
+        aria-label="Filters"
         variant="outline"
         size="lg"
+        className={cn("px-4", className)}
         onPress={() => {
           console.log(timeCommitment);
         }}
@@ -114,8 +120,8 @@ export default function () {
         <ListFilterIcon />
         Filters
       </Button>
-      <Dropdown.Popover>
-        <Accordion className="w-full max-w-md">
+      <Dropdown.Popover className="max-w-[92vw] sm:max-w-sm">
+        <Accordion className="w-[min(22rem,90vw)] max-w-md">
           {filters.map((filter) => (
             <Accordion.Item key={filter.name}>
               <Accordion.Heading>

@@ -8,7 +8,7 @@ export default function () {
 
   return (
     <PageWrapper page="home">
-      <h1 className="text-5xl font-semibold">Club search, simplified.</h1>
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center">Club search, simplified.</h1>
       <RainbowInput
         onSearch={async (query) => {
           try {

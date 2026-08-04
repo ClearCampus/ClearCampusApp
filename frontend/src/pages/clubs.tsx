@@ -98,7 +98,7 @@ export default function () {
         <p className="text-sm font-medium tracking-widest uppercase text-default-500">
           For Clubs
         </p>
-        <h1 className="text-5xl font-semibold leading-tight">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight">
           Your club, easier to find.
         </h1>
         <p className="text-lg text-default-500 max-w-xl">
