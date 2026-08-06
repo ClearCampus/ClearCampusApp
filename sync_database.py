@@ -4,6 +4,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from dotenv import load_dotenv
+import requests
 from pinecone import Pinecone, ServerlessSpec
 from google.cloud import firestore
 
@@ -42,6 +43,22 @@ def url_to_id(url: str | None) -> str:
     if not url:
         return ""
     return url.rstrip("/").split("/")[-1] or url
+
+def check_url_alive(session: requests.Session, url: str, retries: int = 2, timeout: int = 10) -> bool | None:
+    """Directly re-checks a club's own page (authoritative — unlike being absent from a listing
+    scrape, which can happen for unrelated reasons). True=live, False=confirmed 404, None=inconclusive
+    (network/server hiccup); inconclusive must never be treated as a confirmed removal."""
+    for attempt in range(retries):
+        try:
+            resp = session.get(url, timeout=timeout, allow_redirects=True)
+            if resp.status_code == 404:
+                return False
+            if resp.ok:
+                return True
+        except requests.RequestException:
+            pass
+        time.sleep(1)
+    return None
 
 def delete_collection(collection_name: str) -> None:
     """
@@ -128,40 +145,68 @@ clubs_collection = db.collection("clubs")
 existing_docs = {} if REBUILD else {doc.id: doc.to_dict() or {} for doc in clubs_collection.stream()}
 existing_doc_ids = set(existing_docs.keys())
 
-# A. Flag removed clubs for pending deletion (do NOT hard-delete)
+# A. Reconcile pending deletions (do NOT hard-delete):
+#    1. restore anything that reappeared in this week's (verified-complete) scrape
+#    2. flag anything newly missing
+#    3. directly re-check every still-pending club's own URL, since being absent from the
+#       listing scrape doesn't by itself prove the club's page is actually gone
 PENDING_FILE = os.path.join(base_dir, "pending_deletion.json")
 if not REBUILD:
-    removed_ids = existing_doc_ids - scraped_club_ids
-    if removed_ids:
-        # Load existing pending list to avoid duplicates
-        if os.path.exists(PENDING_FILE):
-            with open(PENDING_FILE) as f:
-                pending = json.load(f)
-        else:
-            pending = []
-
-        already_pending = {entry["id"] for entry in pending}
-        newly_removed = removed_ids - already_pending
-        flagged_on = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
-        if newly_removed:
-            print(f"{len(newly_removed)} clubs newly flagged for pending deletion...")
-            for club_id in newly_removed:
-                existing_data = existing_docs.get(club_id, {})
-                pending.append({
-                    "id": club_id,
-                    "name": existing_data.get("name", ""),
-                    "url": existing_data.get("url", ""),
-                    "flagged_on": flagged_on,
-                    "status": "pending",
-                })
-            with open(PENDING_FILE, "w") as f:
-                json.dump(pending, f, indent=2)
-            print(f"Flagged {len(newly_removed)} clubs in pending_deletion.json (not deleted from DB).")
-        else:
-            print(f"{len(removed_ids)} clubs already flagged — no new entries.")
+    if os.path.exists(PENDING_FILE):
+        with open(PENDING_FILE) as f:
+            pending = json.load(f)
     else:
-        print("No clubs removed.")
+        pending = []
+
+    pending_by_id = {entry["id"]: entry for entry in pending}
+    checked_on = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    # A1. Auto-restore: reappeared in this week's scrape.
+    restored_ids = set(pending_by_id.keys()) & scraped_club_ids
+    for club_id in restored_ids:
+        print(f"  Restored (reappeared in scrape): {pending_by_id[club_id].get('name')} ({club_id})")
+        del pending_by_id[club_id]
+
+    # A2. Flag clubs newly missing from the scrape.
+    removed_ids = existing_doc_ids - scraped_club_ids
+    newly_removed = removed_ids - set(pending_by_id.keys())
+    for club_id in newly_removed:
+        existing_data = existing_docs.get(club_id, {})
+        pending_by_id[club_id] = {
+            "id": club_id,
+            "name": existing_data.get("name", ""),
+            "url": existing_data.get("url", ""),
+            "flagged_on": checked_on,
+            "last_checked": checked_on,
+            "status": "pending",
+        }
+    if newly_removed:
+        print(f"{len(newly_removed)} clubs newly flagged for pending deletion...")
+
+    # A3. Directly re-check every remaining pending club's own page.
+    still_pending_ids = [cid for cid in pending_by_id if cid not in newly_removed]
+    if still_pending_ids:
+        print(f"Re-checking {len(still_pending_ids)} previously pending club URLs directly...")
+        check_session = requests.Session()
+        check_session.headers.update({"User-Agent": "Mozilla/5.0"})
+        for club_id in still_pending_ids:
+            entry = pending_by_id[club_id]
+            url = entry.get("url")
+            if not url:
+                continue
+            alive = check_url_alive(check_session, url)
+            entry["last_checked"] = checked_on
+            if alive:
+                print(f"  Restored (URL is live again): {entry.get('name')} ({club_id})")
+                del pending_by_id[club_id]
+            elif alive is False:
+                entry["status"] = "confirmed_gone"
+
+    pending = list(pending_by_id.values())
+    with open(PENDING_FILE, "w") as f:
+        json.dump(pending, f, indent=2)
+    confirmed_gone = sum(1 for e in pending if e.get("status") == "confirmed_gone")
+    print(f"pending_deletion.json now has {len(pending)} entries ({confirmed_gone} confirmed gone via direct check).")
 
 # B. Upsert new/changed clubs only
 print(f"Upserting {len(clubs_to_sync)} clubs to Firestore `/clubs` collection...")
