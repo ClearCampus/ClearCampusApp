@@ -476,6 +476,7 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
         # Keyword injection: guarantee clubs whose names contain query tokens are in the
         # candidate pool, even if vector similarity ranked them outside the top fetch_k.
         # This fixes exact-word queries like "car" or "cars" that vector search misses.
+        # Uses prefix matching in both directions so "cars" matches "car" and vice versa.
         query_tokens = [t.lower() for t in query.split() if len(t) > 1]
         if query_tokens:
             embedded_clubs = load_embedded_clubs()
@@ -483,8 +484,13 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
                 club_id = url_to_id(c.get("url", "")) or c.get("name", "").lower().replace(" ", "-")
                 if club_id in pinecone_ids:
                     continue
-                name_lower = c.get("name", "").lower()
-                if any(token in name_lower for token in query_tokens):
+                name_words = c.get("name", "").lower().split()
+                def name_matches(q_token, name_words):
+                    for w in name_words:
+                        if w.startswith(q_token) or q_token.startswith(w):
+                            return True
+                    return False
+                if any(name_matches(token, name_words) for token in query_tokens):
                     matches.append({
                         "id": club_id,
                         "slug": club_id,
@@ -510,6 +516,11 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
                 reranked_matches = []
                 for item in reranked.data:
                     if item.index is None:
+                        continue
+                    # Skip results the reranker has no confidence in (flat floor score).
+                    # 0.28 is below the observed floor of ~0.25 for irrelevant results
+                    # but above genuine low-confidence matches.
+                    if item.score < 0.28:
                         continue
                     original = matches[item.index]
                     original["rerank_score"] = item.score
