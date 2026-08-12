@@ -415,14 +415,16 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
             input=query
         )
         vec = response.data[0].embedding
-        
-        fetch_k = limit * 4
+
+        # Pull a large candidate pool so the reranker has real signal to work with.
+        # 20 (the old limit*4) was eliminating correct results before reranking ever saw them.
+        fetch_k = max(150, limit * 20)
         try:
             results = index.query(vector=vec, top_k=fetch_k, include_metadata=True)
         except Exception as pc_err:
             print(f"Pinecone query failed: {pc_err}. Performing local vector search.")
             results = None
-            
+
         if not results or not results.matches:
             embedded_clubs = load_embedded_clubs()
             if embedded_clubs:
@@ -447,17 +449,17 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
                 scored.sort(key=lambda x: x[0], reverse=True)
                 return [item[1] for item in scored[:limit]]
             return firestore_fallback()
-            
+
+        # Build the candidate list from Pinecone results.
+        pinecone_ids = set()
         matches = []
+        match_texts = []
         for match in results.matches:
             m = match.metadata
             if m is None:
                 continue
-            
-            club_id = url_to_id(m.get("url", ""))
-            if not club_id:
-                club_id = m.get("name", "").lower().replace(" ", "-")
-
+            club_id = url_to_id(m.get("url", "")) or m.get("name", "").lower().replace(" ", "-")
+            pinecone_ids.add(club_id)
             matches.append({
                 "id": club_id,
                 "slug": club_id,
@@ -469,18 +471,42 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
                 "events": [],
                 "content": []
             })
-            
+            match_texts.append(m.get("text") or f"{m.get('name', '')} | {m.get('description', '')}")
+
+        # Keyword injection: guarantee clubs whose names contain query tokens are in the
+        # candidate pool, even if vector similarity ranked them outside the top fetch_k.
+        # This fixes exact-word queries like "car" or "cars" that vector search misses.
+        query_tokens = [t.lower() for t in query.split() if len(t) > 1]
+        if query_tokens:
+            embedded_clubs = load_embedded_clubs()
+            for c in embedded_clubs:
+                club_id = url_to_id(c.get("url", "")) or c.get("name", "").lower().replace(" ", "-")
+                if club_id in pinecone_ids:
+                    continue
+                name_lower = c.get("name", "").lower()
+                if any(token in name_lower for token in query_tokens):
+                    matches.append({
+                        "id": club_id,
+                        "slug": club_id,
+                        "name": c.get("name", ""),
+                        "description": c.get("description", ""),
+                        "url": c.get("url", ""),
+                        "logo": "/hero.png",
+                        "score": 0.0,
+                        "events": [],
+                        "content": []
+                    })
+                    match_texts.append(c.get("text") or f"{c.get('name', '')} | {c.get('description', '')}")
+
         try:
-            documents = [m.get("text", f"{m.get('name')} | {m.get('description')}") for m in [match.metadata for match in results.matches if match.metadata]]
-            if documents:
+            if match_texts:
                 reranked = pc.inference.rerank(
                     model="bge-reranker-v2-m3",
                     query=query,
-                    documents=documents,
+                    documents=match_texts,
                     top_n=limit,
                     return_documents=True,
                 )
-                
                 reranked_matches = []
                 for item in reranked.data:
                     if item.index is None:
@@ -491,7 +517,7 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
                 return reranked_matches
         except Exception as rerank_err:
             print(f"Reranking failed (falling back to vector score): {rerank_err}")
-            
+
         return matches[:limit]
 
     except Exception as e:
