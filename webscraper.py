@@ -102,6 +102,18 @@ if os.path.exists(OUTPUT_FILE):
         print("Aborting — this looks like a broken/partial scrape, not real mass removals.")
         sys.exit(1)
 
+# Deduplicate by URL (preserves first occurrence; second occurrence on another page would
+# have kept email/phone="none" anyway since url_to_club dict only tracks one entry per URL).
+seen_urls = set()
+deduped = []
+for club in clubs:
+    if club["url"] not in seen_urls:
+        seen_urls.add(club["url"])
+        deduped.append(club)
+if len(deduped) < len(clubs):
+    print(f"  Warning: removed {len(clubs) - len(deduped)} duplicate URL entries")
+clubs = deduped
+
 # Step 2: fetch detail pages concurrently to grab emails
 session = requests.Session()
 session.headers.update(HEADERS)

@@ -273,7 +273,7 @@ for i, club in enumerate(clubs_to_sync):
     # Firestore batches are capped at 500 writes
     if batch_count >= 400 or (i + 1) == len(clubs_to_sync):
         firestore_batch.commit()
-        print(f"  Committed Firestore batch update: {i+1}/{len(embedded_clubs)}")
+        print(f"  Committed Firestore batch update: {i+1}/{len(clubs_to_sync)}")
         firestore_batch = db.batch()
         batch_count = 0
 

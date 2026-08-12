@@ -1,5 +1,6 @@
 import json
 import os
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from dotenv import load_dotenv
@@ -36,18 +37,28 @@ def is_changed(club, existing):
     )
 
 
-def embed_club(club):
+def embed_club(club, retries=4, backoff=2):
     text = build_text(club)
-    response = client.embeddings.create(model="text-embedding-3-small", input=text)
-    return {
-        "name": club["name"],
-        "description": club["description"],
-        "url": club["url"],
-        "email": club.get("email", "none"),
-        "phone": club.get("phone", "none"),
-        "text": text,
-        "vector": response.data[0].embedding,
-    }
+    last_exc = None
+    for attempt in range(retries):
+        try:
+            response = client.embeddings.create(model="text-embedding-3-small", input=text)
+            return {
+                "name": club["name"],
+                "description": club["description"],
+                "url": club["url"],
+                "email": club.get("email", "none"),
+                "phone": club.get("phone", "none"),
+                "text": text,
+                "vector": response.data[0].embedding,
+            }
+        except Exception as e:
+            last_exc = e
+            if attempt < retries - 1:
+                wait = backoff * (2 ** attempt)
+                print(f"  Warning: embedding attempt {attempt + 1} failed for '{club.get('name')}': {e}. Retrying in {wait}s...")
+                time.sleep(wait)
+    raise RuntimeError(f"Failed to embed '{club.get('name')}' after {retries} attempts: {last_exc}")
 
 
 # Split into unchanged (reuse) vs new/changed (embed)
