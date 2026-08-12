@@ -1454,5 +1454,54 @@
     "flagged_on": "2026-08-06",
     "last_checked": "2026-08-06",
     "status": "pending"
+  },
+  {
+    "id": "f4a",
+    "name": "Feminism 4 Aggies",
+    "url": "https://getinvolved.tamu.edu/org/f4a",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
+  },
+  {
+    "id": "msva",
+    "name": "Texas A&M Medical Student Veterans Association",
+    "url": "https://getinvolved.tamu.edu/org/msva",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
+  },
+  {
+    "id": "mdplus",
+    "name": "MD Plus Student Organization",
+    "url": "https://getinvolved.tamu.edu/org/mdplus",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
+  },
+  {
+    "id": "acpc",
+    "name": "Aggie Competitive Programming Club",
+    "url": "https://getinvolved.tamu.edu/org/acpc",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
+  },
+  {
+    "id": "gass",
+    "name": "Gillespie Anesthesiology Student Society",
+    "url": "https://getinvolved.tamu.edu/org/gass",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
+  },
+  {
+    "id": "vetmed2027",
+    "name": "Texas A&M University School of Veterinary Medicine Class of 2027",
+    "url": "https://getinvolved.tamu.edu/org/vetmed2027",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
+  },
+  {
+    "id": "666",
+    "name": "Mentorship in Ocean Engineering",
+    "url": "https://getinvolved.tamu.edu/org/666",
+    "flagged_on": "2026-08-09",
+    "status": "pending"
   }
 ]
