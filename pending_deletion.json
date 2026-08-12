@@ -1029,7 +1029,7 @@
     "url": "https://getinvolved.tamu.edu/org/ncf",
     "flagged_on": "2026-08-12",
     "last_checked": "2026-08-12",
-    "status": "pending"
+    "status": "confirmed_gone"
   },
   {
     "id": "tamsod2026",
@@ -1037,7 +1037,7 @@
     "url": "https://getinvolved.tamu.edu/org/tamsod2026",
     "flagged_on": "2026-08-12",
     "last_checked": "2026-08-12",
-    "status": "pending"
+    "status": "confirmed_gone"
   },
   {
     "id": "kappa-sigma",
@@ -1045,6 +1045,6 @@
     "url": "https://getinvolved.tamu.edu/org/kappa-sigma",
     "flagged_on": "2026-08-12",
     "last_checked": "2026-08-12",
-    "status": "pending"
+    "status": "confirmed_gone"
   }
 ]
