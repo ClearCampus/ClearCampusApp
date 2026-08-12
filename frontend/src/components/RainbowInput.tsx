@@ -90,7 +90,7 @@ function useTypewriterPlaceholder(
 }
 
 interface RainbowInputProps {
-  onSearch: (query: string) => void;
+  onSearch: (query: string) => Promise<void>;
 }
 
 function SearchButton({
@@ -123,11 +123,13 @@ export default function (props: RainbowInputProps) {
   const [query, setQuery] = useState("");
 
   async function search() {
+    if (!query.trim()) return;
     setIsSearching(true);
-    setTimeout(() => {
+    try {
+      await props.onSearch(query);
+    } finally {
       setIsSearching(false);
-      props.onSearch(query);
-    }, 2000);
+    }
   }
 
   return (

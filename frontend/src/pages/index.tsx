@@ -10,7 +10,7 @@ export default function () {
     <PageWrapper page="home">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-center">Club search, simplified.</h1>
       <RainbowInput
-        onSearch={async (query) => {
+        onSearch={async (query): Promise<void> => {
           try {
             const baseUrl = import.meta.env.VITE_API_URL || "";
             const res = await fetch(`${baseUrl}/api/clubs/search?query=${encodeURIComponent(query)}`);
