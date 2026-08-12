@@ -229,12 +229,15 @@ for i, club in enumerate(clubs_to_sync):
             "updated_at": firestore.SERVER_TIMESTAMP
         }
 
-        # Only overwrite official_email/phone if changed
+        # Only overwrite official_email/phone/website if changed
         if mapped_email and mapped_email != "none" and existing_data.get("official_email") != mapped_email:
             update_data["official_email"] = mapped_email
         mapped_phone = club.get("phone")
         if mapped_phone and mapped_phone != "none" and existing_data.get("phone") != mapped_phone:
             update_data["phone"] = mapped_phone
+        mapped_website = club.get("website")
+        if mapped_website and mapped_website != "none" and existing_data.get("website") != mapped_website:
+            update_data["website"] = mapped_website
             
         # Ensure filters block exists
         if "filters" not in existing_data:
@@ -255,6 +258,7 @@ for i, club in enumerate(clubs_to_sync):
             "url": club["url"],
             "official_email": mapped_email if mapped_email and mapped_email != "none" else None,
             "phone": club.get("phone") if club.get("phone") != "none" else None,
+            "website": club.get("website") if club.get("website") != "none" else None,
             "claimed": False,
             "owner_uids": [],
             "filters": {

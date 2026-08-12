@@ -34,6 +34,7 @@ def is_changed(club, existing):
         or club.get("description") != existing.get("description")
         or club.get("email", "none") != existing.get("email", "none")
         or club.get("phone", "none") != existing.get("phone", "none")
+        or club.get("website", "none") != existing.get("website", "none")
     )
 
 
@@ -49,6 +50,7 @@ def embed_club(club, retries=4, backoff=2):
                 "url": club["url"],
                 "email": club.get("email", "none"),
                 "phone": club.get("phone", "none"),
+                "website": club.get("website", "none"),
                 "text": text,
                 "vector": response.data[0].embedding,
             }

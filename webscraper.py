@@ -40,6 +40,7 @@ def fetch_page(page, retries=3, backoff=2):
                     "url": str(link_el["href"]) if link_el else "",
                     "email": "none",
                     "phone": "none",
+                    "website": "none",
                 })
             return page, results, True
         except Exception as e:
@@ -122,16 +123,27 @@ url_to_club = {club["url"]: club for club in clubs if club["url"]}
 
 def fetch_contact(url):
     try:
-        detail = session.get(url, timeout=5)
+        detail = session.get(url, timeout=10)
         soup = BeautifulSoup(detail.text, "html.parser")
         mailto = soup.select_one("a[href^='mailto:']")
         tel = soup.select_one("a[href^='tel:']")
         email = str(mailto["href"]).replace("mailto:", "").strip() if mailto else "none"
         phone = str(tel["href"]).replace("tel:", "").strip() if tel else "none"
-        return url, email, phone
+        # Website: find the <dt> containing a "Website" sr-only span, grab the link in its <dd>
+        website = "none"
+        for dt in soup.find_all("dt"):
+            label = dt.find("span", class_="sr-only")
+            if label and label.get_text(strip=True).lower() == "website":
+                dd = dt.find_next_sibling("dd")
+                if dd:
+                    a = dd.find("a", href=True)
+                    if a:
+                        website = str(a["href"]).strip()
+                break
+        return url, email, phone, website
     except Exception as e:
         print(f"  Warning: could not fetch {url}: {e}")
-        return url, "none", "none"
+        return url, "none", "none", "none"
 
 total = len(url_to_club)
 done = 0
@@ -140,9 +152,10 @@ print(f"Fetching contact info from {total} detail pages ({WORKERS} workers)...")
 with ThreadPoolExecutor(max_workers=WORKERS) as executor:
     futures = {executor.submit(fetch_contact, url): url for url in url_to_club}
     for future in as_completed(futures):
-        url, email, phone = future.result()
+        url, email, phone, website = future.result()
         url_to_club[url]["email"] = email
         url_to_club[url]["phone"] = phone
+        url_to_club[url]["website"] = website
         done += 1
         if done % 100 == 0 or done == total:
             print(f"  {done}/{total} detail pages done")
