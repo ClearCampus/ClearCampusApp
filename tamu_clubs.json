@@ -40,28 +40,12 @@
     "website": "https://www.instagram.com/1stgrouptamu?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
   },
   {
-    "name": "1st Wing",
-    "description": "The Wing will pursue excellence by founding an environment that demands growth, exercises leadership, challenges character, and encourages cadets to participate fully in the life-changing experience of the Corps of Cadets. Above all, we will strive to selflessly serve those around us.",
-    "url": "https://getinvolved.tamu.edu/org/1st-wing",
-    "email": "none",
-    "phone": "none",
-    "website": "none"
-  },
-  {
     "name": "2D Visual Developers",
     "description": "To provide a space where those with a shared interest in comics, animation, graphic novels, and concept art can come together and create.",
     "url": "https://getinvolved.tamu.edu/org/2vd",
     "email": "2dvisdev@gmail.com",
     "phone": "none",
     "website": "https://linktr.ee/2dvd"
-  },
-  {
-    "name": "2nd Battalion Staff",
-    "description": "Develop Well Educated Leaders of Character, Honor and Integrity- prepared to \"Answer the Call\".",
-    "url": "https://getinvolved.tamu.edu/org/2bde",
-    "email": "Jal7257@tamu.edu",
-    "phone": "none",
-    "website": "none"
   },
   {
     "name": "2nd Group Staff",
@@ -211,8 +195,8 @@
     "name": "Aesthetic and Cosmetic Dentistry Club",
     "description": "The purpose of the ACDC is to give dental students the opportunity and resources to learn, explore, promote awareness, and network within the field of aesthetic and cosmetic dentistry.",
     "url": "https://getinvolved.tamu.edu/org/acdc",
-    "email": "acdcdentistry@gmail.com",
-    "phone": "none",
+    "email": "dle@tamu.edu",
+    "phone": "2066737464",
     "website": "none"
   },
   {
@@ -277,7 +261,7 @@
     "url": "https://getinvolved.tamu.edu/org/aawe",
     "email": "aggieawe@gmail.com",
     "phone": "none",
-    "website": "none"
+    "website": "https://aawe.engr.tamu.edu/"
   },
   {
     "name": "Aggie Ambassadors",
@@ -366,6 +350,14 @@
     "email": "ceo.abmc@gmail.com",
     "phone": "none",
     "website": "https://aggieblackmaleconnection.godaddysites.com/"
+  },
+  {
+    "name": "Aggie Blacksmithing Club",
+    "description": "Our mission is to practice and educate individuals in the field of blacksmithing and metalworking. We aim to teach individuals to safely and effectively learn the art of blacksmithing. Aggie Blacksmithing hosts workshops and provides space and resources for students to practice working with metal, as well as ample opportunities...",
+    "url": "https://getinvolved.tamu.edu/org/blacksmithing",
+    "email": "contact@aggieblacksmithing.org",
+    "phone": "none",
+    "website": "https://aggieblacksmithing.org/"
   },
   {
     "name": "Aggie Blades",
@@ -760,14 +752,6 @@
     "website": "none"
   },
   {
-    "name": "Aggie Military, Veterans, and First Responder Healthcare Alliance",
-    "description": "The purpose and mission of our student organization, Aggie Military, Veterans, & First Responder Healthcare Alliance, is to provide a university-wide community for faculty, staff, students, and alumni interested in supporting and/or promoting military healthcare initiatives. Our vision is to create a network for those interested in military service or...",
-    "url": "https://getinvolved.tamu.edu/org/amvfrha",
-    "email": "none",
-    "phone": "none",
-    "website": "none"
-  },
-  {
     "name": "Aggie Minority Women in Law",
     "description": "Empowering minority women to succeed in the law field through preparation and inclusivity.",
     "url": "https://getinvolved.tamu.edu/org/amwl",
@@ -849,11 +833,11 @@
   },
   {
     "name": "Aggie Parent & Family Ambassadors",
-    "description": "It is the Mission of the Aggie Parent & Family Ambassadors to serve the students as well as the family members of Texas A&M by providing a weekend of thanks to these supports of Texas A&M University. This is done through a number of events that show the families of...",
+    "description": "The Aggie Parent and Family Ambassadors are dedicated to strengthening the connection between students and families at Texas A&M. By introducing Aggie Families to university traditions, encouraging involvement, and amplifying family voices through campus events and programming, our Ambassadors help foster a supportive community for Aggies.",
     "url": "https://getinvolved.tamu.edu/org/apfa",
     "email": "apfa@tamu.edu",
     "phone": "979-845-5826",
-    "website": "http://familyprograms.tamu.edu"
+    "website": "https://familyprograms.tamu.edu/involvement/aggie-parent-and-family-ambassadors/"
   },
   {
     "name": "Aggie Pediatric Nursing Association",
@@ -968,6 +952,14 @@
     "website": "none"
   },
   {
+    "name": "Aggie Salvation Army",
+    "description": "The Aggie Salvation Army (ASA), a faith based organization, is established to engage students to the greater mission of The Salvation Army by preaching the gospel of Jesus Christ and to meet human needs without discrimination. It will serve alongside the local Salvation Army in providing awareness, volunteers, and funds.",
+    "url": "https://getinvolved.tamu.edu/org/aggie-salvation-army",
+    "email": "aggiesalarmy@gmail.com",
+    "phone": "none",
+    "website": "https://salvationarmybcs.org/bryan-collegestation/student-org/"
+  },
+  {
     "name": "Aggie School Volunteers",
     "description": "To enhance the lives of children by acting as a weekly tutor, mentor, or lunch buddy. We also hold biweekly meetings and fun events to encourage members to get to know one another better. Additionally, we search for outside volunteering opportunities for members who would like to be more involved...",
     "url": "https://getinvolved.tamu.edu/org/asv",
@@ -1067,9 +1059,9 @@
     "name": "Aggie Transition Camps (ATC)",
     "description": "Aggie Transition Camps is an orientation program for all students that enter Texas A&M University in the fall or spring semesters. Through this three day camp, we help incoming students prepare for the overwhelming academic and extra-curricular opportunities they will find in Aggieland. Aggie Transition Camps serves to educate these...",
     "url": "https://getinvolved.tamu.edu/org/atc1987",
-    "email": "none",
+    "email": "atc-pr@dsa.tamu.edu",
     "phone": "none",
-    "website": "none"
+    "website": "http://atc.tamu.edu"
   },
   {
     "name": "Aggie Undergraduate Research Association",
@@ -1179,7 +1171,7 @@
     "name": "Aggies All Booked",
     "description": "Connecting with women who love reading romance and cultivating a safe space for them to discuss their thoughts and opinions about it.",
     "url": "https://getinvolved.tamu.edu/org/aab",
-    "email": "aggiesallbooked2023@gmail.com",
+    "email": "laurenpjacobs12@tamu.edu",
     "phone": "none",
     "website": "none"
   },
@@ -1204,7 +1196,7 @@
     "description": "Aggies Delivering Smiles (ADS) is dedicated to enhancing oral hygiene in the Bryan/College Station area. We provide free oral hygiene education and community engagement activities for a specific target population. Education and engagement is catered and crafted to meet the requirements of the population that we aim to serve. Overall...",
     "url": "https://getinvolved.tamu.edu/org/2881",
     "email": "deliveringsmiles.tamu@gmail.com",
-    "phone": "8322406729",
+    "phone": "4696182806",
     "website": "none"
   },
   {
@@ -1227,8 +1219,8 @@
     "name": "Aggies for Christ On Campus",
     "description": "The AFC On-Campus is a student-led group that works to link Christians with opportunities to find community with other believers and to serve alongside local churches, fellow students and the community of Bryan-College Station. Through the AFC On Campus, college students can get plugged into a community of Christians, develop...",
     "url": "https://getinvolved.tamu.edu/org/afc-oc",
-    "email": "brian@amchurch.net",
-    "phone": "none",
+    "email": "Evan.gruis@tamu.edu",
+    "phone": "5128002702",
     "website": "http://aggiesforchrist.org"
   },
   {
@@ -1640,6 +1632,14 @@
     "website": "none"
   },
   {
+    "name": "American Fisheries Society, Texas A&M University Chapter",
+    "description": "Our mission and purpose is to: (a) promote the conservation, development, and wise use of the fisheries; (b) promote and evaluate the development and advancement of all branches of fisheries science and practice; (c) gather and disseminate to Chapter members, American Fisheries Society members, and the general public scientific, technical,...",
+    "url": "https://getinvolved.tamu.edu/org/tamuafs",
+    "email": "afstamu@gmail.com",
+    "phone": "none",
+    "website": "http://tamuafs.tamu.edu"
+  },
+  {
     "name": "American Institute of Aeronautics and Astronautics",
     "description": "The AIAA Student Chapter at Texas A&M University College Station is committed to helping students with personal and professional development in the aerospace industry, as well as giving back to the surrounding community. We provide members with opportunities to interact with professional engineers from industry-leading companies, relax and have fun...",
     "url": "https://getinvolved.tamu.edu/org/aiaa",
@@ -1952,6 +1952,14 @@
     "website": "none"
   },
   {
+    "name": "Association of Environmental Engineering Students",
+    "description": "The Association of Environmental Engineering Students at Texas A&M University is an academic organization comprising dedicated students with an interest in environmental engineering. We have periodic meetings with professional speakers who work in the environmental engineering industry or related fields as well as social events and group service projects. AEES...",
+    "url": "https://getinvolved.tamu.edu/org/aees",
+    "email": "vp.aeestamu@gmail.com",
+    "phone": "none",
+    "website": "https://praeestamu.wixsite.com/aees-texas-a-m"
+  },
+  {
     "name": "The Association of Fundraising Professionals",
     "description": "AFP at Texas A&M connects students with careers in fundraising and nonprofit management. Through monthly meetings, networking events, and professional development workshops, members gain practical experience in fundraising strategies, donor relations, and nonprofit operations. Our chapter partners with AFP Greater Houston to provide access to industry professionals and mentorship opportunities....",
     "url": "https://getinvolved.tamu.edu/org/afp",
@@ -1995,7 +2003,7 @@
     "name": "Aston Community Council",
     "description": "The Aston Community Council brings residents together and helps make Aston Hall feel like home. We represent resident interests, create engaging programs and traditions, and work to enhance the residential experience. By getting involved, members can build connections, develop leadership skills, and make a direct impact on where they live....",
     "url": "https://getinvolved.tamu.edu/org/aston-hall",
-    "email": "astonhalldirector@tamu.edu",
+    "email": "aston.hall.tamu@gmail.com",
     "phone": "none",
     "website": "https://rha.tamu.edu/cc/"
   },
@@ -2011,7 +2019,7 @@
     "name": "Autodesk Design & Make Ambassadors at Texas A&M",
     "description": "The purpose of Autodesk TAMU is to promote design, engineering innovation, and technical skill development through the use of Autodesk software and tools. The organization aims to provide educational workshops, industry engagement opportunities, and collaborative projects that support students in engineering, architecture, construction, and related disciplines. Autodesk TAMU serves as...",
     "url": "https://getinvolved.tamu.edu/org/3309",
-    "email": "Charlesrwentworth@gmail.com",
+    "email": "Charlesrwentworth@tamu.edu",
     "phone": "(210) 777-7733",
     "website": "none"
   },
@@ -2078,6 +2086,14 @@
     "email": "betasigtamu@gmail.com",
     "phone": "none",
     "website": "none"
+  },
+  {
+    "name": "Beta Tau Omega",
+    "description": "Beta Tau Omega is an Asian-interest fraternity at Texas A&M University, founded on August 28, 1995, and it describes itself as the first Asian-interest fraternity at the university. Its stated purpose is to build brotherhood and promote service, chivalry, leadership, and a strong presence in Asian-American culture. The organization highlights...",
+    "url": "https://getinvolved.tamu.edu/org/bto",
+    "email": "betatauomega95@gmail.com",
+    "phone": "none",
+    "website": "http://www.betatauomega.com"
   },
   {
     "name": "Beta Theta Pi",
@@ -2184,6 +2200,14 @@
     "website": "https://www.tamubsa.com"
   },
   {
+    "name": "Black Graduate Student Association",
+    "description": "The Black Graduate Student Association (BGSA) exists to support and connect graduate and professional students who identify within the African diaspora. We are committed to fostering a vibrant community that encourages belonging, celebrates culture, and supports members throughout their academic journeys. BGSA promotes professional development, cultivates meaningful social networks, and...",
+    "url": "https://getinvolved.tamu.edu/org/bgsa",
+    "email": "bgsa.tamu@gmail.com",
+    "phone": "none",
+    "website": "http://bgsa-tamu.weebly.com"
+  },
+  {
     "name": "Black Law Student Association",
     "description": "Who is NBLSA? The National Black Law Students Association (NBLSA) is a national organization created and designed to articulate and promote the professional needs and goals of Black law students; to foster and encourage professional competence; to focus upon the relationship of the Black attorney to the American legal system;...",
     "url": "https://getinvolved.tamu.edu/org/blsa",
@@ -2283,7 +2307,7 @@
     "name": "Building Researchers and Innovators in Neuroscience and Society",
     "description": "Building Researchers and Innovators in Neuroscience and Society (BRAINS) is dedicated to a higher understanding of the human mind and body. Its commitment to discovery, collaboration and developing technologies in the field of neuroscience provides an exciting environment for development, growth, and improvement of undergraduate and graduate research at Texas...",
     "url": "https://getinvolved.tamu.edu/org/brains",
-    "email": "tamin.sandi@gmail.com",
+    "email": "tamubrains@gmail.com",
     "phone": "none",
     "website": "http://tamin.tamu.edu/brains/"
   },
@@ -2325,6 +2349,14 @@
     "url": "https://getinvolved.tamu.edu/org/bha",
     "email": "TAMUBHAssociation@gmail.com",
     "phone": "9798623132",
+    "website": "none"
+  },
+  {
+    "name": "Business Information Technology Students",
+    "description": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 MISSION To provide students the opportunities to learn more about Information Technology through interaction with members of the professional community. \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 \u00a0 \u00a0 \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 VISION Our organization supplements Texas A&M students with opportunities to network with peers and members of various industries while assisting in career development....",
+    "url": "https://getinvolved.tamu.edu/org/bits",
+    "email": "bits@mays.tamu.edu",
+    "phone": "none",
     "website": "none"
   },
   {
@@ -2520,6 +2552,14 @@
     "website": "https://www.chegsatamu.com"
   },
   {
+    "name": "Chemical Engineering Undergraduate Student Advisory Council (CHEN-USAC)",
+    "description": "The Texas A&M Chemical Engineering Undergraduate Advisory Council (CHEN-USAC) was formed in 2018 to\u00a0represent the undergraduate student body, serving as clear line of communication and feedback loop between students, faculty and staff and remaining impartial and non-discriminatory to both faculty and students. USAC meets monthly to gather and generate ideas...",
+    "url": "https://getinvolved.tamu.edu/org/usac",
+    "email": "tamuchenusac@gmail.com",
+    "phone": "none",
+    "website": "https://tamuchen-usac.weebly.com"
+  },
+  {
     "name": "Chi Omega",
     "description": "Chi Omega is a sisterhood that is focused on life long friendships. Chi Omega is committed to friendship, personal integrity, service to others, academic excellence and intellectual pursuits, community and campus involvement, and personal and career development.",
     "url": "https://getinvolved.tamu.edu/org/chi-omega",
@@ -2548,14 +2588,6 @@
     "description": "Chillennium grants participating students the opportunity to plan, coordinate, and execute a world-wide game jam event. \r\n\r\nThroughout the year, members will gain experience in a variety of roles such as event coordination, professional communication and relationship management, sponsorship outreach, and more. These demanding roles allow members to increase their skills...",
     "url": "https://getinvolved.tamu.edu/org/3396",
     "email": "none",
-    "phone": "none",
-    "website": "none"
-  },
-  {
-    "name": "Chinese Students and Scholars Association",
-    "description": "1. to promote cultural, academic, as well as science and technology exchanges between China and the United States.\u000b\r\n2. to provide social activities and services to the students, scholars, and their families from China.\r\n3. HAVE FUN!",
-    "url": "https://getinvolved.tamu.edu/org/cssa",
-    "email": "tamu.cssa1@gmail.com",
     "phone": "none",
     "website": "none"
   },
@@ -2691,7 +2723,7 @@
     "name": "Clements Community Council",
     "description": "The Clements Community Council brings residents together and helps make Clements Hall feel like home. We represent resident interests, create engaging programs and traditions, and work to enhance the residential experience. By getting involved, members can build connections, develop leadership skills, and make a direct impact on where they live....",
     "url": "https://getinvolved.tamu.edu/org/clements-hall",
-    "email": "clementshalldirector@tamu.edu",
+    "email": "kimiekopf03@tamu.edu",
     "phone": "none",
     "website": "https://rha.tamu.edu/cc/"
   },
@@ -2904,6 +2936,14 @@
     "website": "none"
   },
   {
+    "name": "Company K-1",
+    "description": "Mission:\r\n\r\nThe mission of Company K-1 is to develop young men and women into highly professional and academically successful leaders of character that are ready to face the challenges that life will hold for them. Whether you want to become a Army Ranger, a missionary, or a business professional, it...",
+    "url": "https://getinvolved.tamu.edu/org/company-k-1",
+    "email": "none",
+    "phone": "none",
+    "website": "http://k-1.tamu.edu"
+  },
+  {
     "name": "Company K-2",
     "description": "Company K-2 exists to create successful leaders of the highest moral character. K-2 operates on a Marine Corps based cultural model that uses physical training, small unit leadership, and peer accountability to create men who uphold the highest standards of the Cadet Corps. The shared challenge and brotherhood associated with...",
     "url": "https://getinvolved.tamu.edu/org/company-k-2",
@@ -2976,14 +3016,6 @@
     "website": "https://div2.clubbaseball.org/league/team/?season=3469e1de-1ca8-4717-a692-e87de6c5beff&team=63c03426-d256-4018-95d5-280db49889bf#team-main"
   },
   {
-    "name": "Corps of Cadets Cyber Operations Special Unit",
-    "description": "The purpose of the Cyber Operations Special Unit is to train cadets in the technical knowledge required to work in the field of cybersecurity. As proof of training, the Cyber Operations Special Unit will compete on a national level in Cybersecurity. These competition include virtual and in-person competitions and CTFs...",
-    "url": "https://getinvolved.tamu.edu/org/cosu",
-    "email": "tamu.corpscyberops@gmail.com",
-    "phone": "none",
-    "website": "none"
-  },
-  {
     "name": "Corps of Cadets Marksmanship Unit",
     "description": "The purpose of the Corps of Cadets Marksmanship Unit is to professionally exemplify Texas A&M and the Corps of Cadets nationwide through a myriad of competitions and educational instruction. We strive to become a paradigm in the shooting industry by training the next generation of America's men and women to...",
     "url": "https://getinvolved.tamu.edu/org/ccmu",
@@ -3006,6 +3038,14 @@
     "email": "wschrank@corps.tamu.edu",
     "phone": "none",
     "website": "https://www.facebook.com/corpsbasketball/?fref=ts"
+  },
+  {
+    "name": "Corps of Cadets Triathlon Team",
+    "description": "The purpose of the Texas A&M Corps of Cadets Triathlon Team is to allow cadets to train in swimming, cycling, and running in order to compete and win in various triathlon races. With the aid of the Corps of Cadets Association, we demonstrate leadership and high athletic performance to develop...",
+    "url": "https://getinvolved.tamu.edu/org/corps-triathlon",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
   },
   {
     "name": "Corps of Cadets Women's Soccer Team",
@@ -3115,7 +3155,7 @@
     "name": "Davis-Gary Community Council",
     "description": "The Davis-Gary Community Council brings residents together and helps make Davis-Gary Hall feel like home. We represent resident interests, create engaging programs and traditions, and work to enhance the residential experience. By getting involved, members can build connections, develop leadership skills, and make a direct impact on where they live....",
     "url": "https://getinvolved.tamu.edu/org/davis-gary-hall",
-    "email": "davis-garyhalldirector@tamu.edu",
+    "email": "rhodak-drl@tamu.edu",
     "phone": "none",
     "website": "https://rha.tamu.edu/cc/"
   },
@@ -3142,6 +3182,14 @@
     "email": "delight.tamu@gmail.com",
     "phone": "8323222680",
     "website": "none"
+  },
+  {
+    "name": "Delta Company",
+    "description": "Veteran only outfit within the Texas A&M Corps of Cadets",
+    "url": "https://getinvolved.tamu.edu/org/delta-company",
+    "email": "stribchett@tamu.edu",
+    "phone": "9729748627",
+    "website": "https://www.facebook.com/corps.tamu.veteran"
   },
   {
     "name": "Delta Delta Delta",
@@ -3651,8 +3699,8 @@
     "name": "FHK Community Council",
     "description": "The FHK Community Council brings residents together and helps make Fowler, Hughes, and Keathley Halls feel like home. We represent resident interests, create engaging programs and traditions, and work to enhance the residential experience. By getting involved, members can build connections, develop leadership skills, and make a direct impact on...",
     "url": "https://getinvolved.tamu.edu/org/fhk-complex",
-    "email": "fhkhalldirector@tamu.edu",
-    "phone": "none",
+    "email": "nsbelcher@tamu.edu",
+    "phone": "9798629654",
     "website": "https://rha.tamu.edu/cc/"
   },
   {
@@ -3883,8 +3931,8 @@
     "name": "Freshmen Aspiring Towards Excellence",
     "description": "At TAMU FATE (Freshman Aspiring Towards Excellence), our mission is to help freshmen at Texas A&M University find their place on campus through fun events, meaningful friendships, and opportunities to grow as leaders. We were founded in 2024 to equip freshman with the skills and network to thrive in college...",
     "url": "https://getinvolved.tamu.edu/org/fate",
-    "email": "tamufatedirectors@gmail.com",
-    "phone": "none",
+    "email": "yaz@tamu.edu",
+    "phone": "4699577811",
     "website": "none"
   },
   {
@@ -4616,8 +4664,16 @@
     "website": "https://urldefense.com/v3/__https://www.tamuiapsa.com/__;!!KwNVnqRv!XepY4UHlOxc25078X5QLKsKowho49VbSDvLKErJN5fIDEh_JvdrG0YuzFL2qADGb9Q$"
   },
   {
+    "name": "International Association of Drilling Contractors Student Chapter",
+    "description": "The mission of the IADC-TAMU Student Chapter is to catalyze engagement between TAMU students, faculty, and the drilling industry. Our purpose is to provide an opportunity to strategically engage students with the drilling industry and IADC, promote cross-disciplinary interaction by engaging students across a wide range of disciplines with a...",
+    "url": "https://getinvolved.tamu.edu/org/iadc",
+    "email": "iadctamu@gmail.com",
+    "phone": "none",
+    "website": "http://www.iadctamu.com"
+  },
+  {
     "name": "International Business Association",
-    "description": "IBA is an open and inclusive organization that develops students into globally literate persons possessing the ability to communicate and do business around the globe.",
+    "description": "IBA is an open and inclusive organization that develops students into globally literate persons possessing the ability to communicate and do business around the globe through partnering with current exchange students at TAMU.",
     "url": "https://getinvolved.tamu.edu/org/iba",
     "email": "tamuiba1@gmail.com",
     "phone": "none",
@@ -4820,14 +4876,6 @@
     "description": "Keeping Hearts Warm TAMU is an organization that exists to provide individuals in need with comfort and support through creating and distributing hand crocheted blankets. Through our mission, we aim to foster compassion, connection, and help keep hearts warm.",
     "url": "https://getinvolved.tamu.edu/org/3387",
     "email": "none",
-    "phone": "none",
-    "website": "none"
-  },
-  {
-    "name": "Kevin Carreathers Leadership Institute",
-    "description": "The purpose of KCLI is to provide a two-year leadership development, skills training, and mentorship program for incoming freshmen at Texas A&M University",
-    "url": "https://getinvolved.tamu.edu/org/kcli",
-    "email": "kclitamu@gmail.com",
     "phone": "none",
     "website": "none"
   },
@@ -6098,9 +6146,17 @@
   {
     "name": "Phi Kappa Tau",
     "description": "The Epsilon Alpha Chapter of the Phi Kappa Tau Fraternity at Texas A&M University seeks to develop men of character into leaders of distinction through academic excellence, service, and lifelong brotherhood.",
-    "url": "https://getinvolved.tamu.edu/org/2869",
+    "url": "https://getinvolved.tamu.edu/org/pkt",
     "email": "tamuphitau@gmail.com",
     "phone": "3464930080",
+    "website": "none"
+  },
+  {
+    "name": "Phi Kappa Theta",
+    "description": "Make men selfless leaders.",
+    "url": "https://getinvolved.tamu.edu/org/3291",
+    "email": "txam@phikaps.org",
+    "phone": "none",
     "website": "none"
   },
   {
@@ -6213,6 +6269,14 @@
     "url": "https://getinvolved.tamu.edu/org/plpm-gsc",
     "email": "none",
     "phone": "none",
+    "website": "none"
+  },
+  {
+    "name": "Plastic and Reconstructive Surgery Interest Group",
+    "description": "The Plastic & Reconstructive Surgery Interest Group (PRSIG) exists to foster education, mentorship, service, professional development, and scholarly engagement for medical students interested in plastic and reconstructive surgery. Through educational programming, hands-on skills workshops, mentorship, research discussions, networking, and community outreach, PRSIG aims to cultivate an informed and collaborative community...",
+    "url": "https://getinvolved.tamu.edu/org/3546",
+    "email": "brittany.lively@tamu.edu",
+    "phone": "9794362549",
     "website": "none"
   },
   {
@@ -6776,14 +6840,6 @@
     "website": "http://sgadiversity.tamu.edu"
   },
   {
-    "name": "Sigma Alpha Epsilon",
-    "description": "To promote the development of character through participating in community service, leadership, scholarship, and brotherhood building activities.",
-    "url": "https://getinvolved.tamu.edu/org/sigma-alpha-epsilon",
-    "email": "sae.texastau.social@gmail.com",
-    "phone": "none",
-    "website": "http://www.aggiesae.com"
-  },
-  {
     "name": "Sigma Alpha Mu",
     "description": "Sigma Alpha Mu has been present at Texas A&M as the Gamma Kappa chapter since 1980 and has been growing ever since recolonizing in 2003. The vision of Sigma Alpha Mu is to foster among its brothers a sense of loyalty among each other and to our university. Housed on...",
     "url": "https://getinvolved.tamu.edu/org/sammy",
@@ -6851,7 +6907,7 @@
     "name": "Sigma Lambda Chi",
     "description": "Sigma Lambda Chi is the society that offers students the opportunity to be recognized locally and internationally for their academic accomplishments as a construction major. Aside from the fundamental purpose, Sigma Lambda Chi has three objectives: The first is to render service to the major field of study. This is...",
     "url": "https://getinvolved.tamu.edu/org/sigma-lambda-chi",
-    "email": "mdaigneault@tamu.edu",
+    "email": "chiang@tamu.edu",
     "phone": "none",
     "website": "https://www.slc-intl.org"
   },
@@ -6992,6 +7048,14 @@
     "website": "https://l.instagram.com/?u=https%3A%2F%2Fsites.google.com%2Fview%2Ftamusubs%3Ffbclid%3DPAAabMcD_bJvPumfNDQ9RVF2wvI6Xl-Y8iycCNveQaSwv357Bc-wKQY44CyQw_aem_AcmzdFSirFe8OKztsZMWVz0M8qB9KC5lNdtq8WaKUKWl8cy2OmrR4GF5MNMM6TDSctY&e=AT1QM-edFfi0f3_RWIckU_9O6e0SpFI-"
   },
   {
+    "name": "The Society for Underwater Technology - Texas A&M University College Station Student Chapter",
+    "description": "SUT is a multi-disciplinary society that brings together other individuals and organizations with a common interest in underwater technology, ocean science, and offshore engineering. The student chapter here at Texas A&M is focused on Career Growth and Networking as well as connecting students with Industry Professionals and Practicing Engineers to...",
+    "url": "https://getinvolved.tamu.edu/org/sut",
+    "email": "SUT.TAMU@gmail.com",
+    "phone": "none",
+    "website": "none"
+  },
+  {
     "name": "Society of Agricultural Finance, Insurance, and Real Estate",
     "description": "The Society of Finance, Insurance, and Real Estate aims to introduce students to career opportunities in the fields of finance, insurance, and real estate, as well as related areas such as law, banking and energy. We encourage our members to build professional relationships and network with industry professionals and employers....",
     "url": "https://getinvolved.tamu.edu/org/fire",
@@ -7076,14 +7140,6 @@
     "description": "The purpose of the organization is to promote student awareness and the education of polymer science and engineering by providing a unique opportunity for networking, mentoring, education and bonding over the common interest of plastics.",
     "url": "https://getinvolved.tamu.edu/org/spe",
     "email": "spe@plastics.tamu.edu",
-    "phone": "none",
-    "website": "none"
-  },
-  {
-    "name": "Society of Pre-Anesthesiology Assistants",
-    "description": "The purpose of the Society of Pre-Anesthesiologist Assistants (SPAA) at Texas A&M is to:\r\n\t\u2022\tPromote awareness and knowledge about the Certified Anesthesiologist Assistant (CAA) career path among students.\r\n\t\u2022\tProvide opportunities for volunteer work, shadowing experiences, and professional development for members interested in anesthesiology and related health fields.\r\n\t\u2022...",
-    "url": "https://getinvolved.tamu.edu/org/3023",
-    "email": "tamupreaasociety@gmail.com",
     "phone": "none",
     "website": "none"
   },
@@ -7440,6 +7496,14 @@
     "website": "none"
   },
   {
+    "name": "Student American Institute of Floral Design",
+    "description": "The purpose and objectives of this organization shall be to further the students interest and participation in floral design through special projects, demonstrations, seminars, and interaction with the floral industry through Texas State Floral Conventions and National AIFD Symposiums.",
+    "url": "https://getinvolved.tamu.edu/org/saifd",
+    "email": "aggiesaifdtamu@gmail.com",
+    "phone": "737-222-4264",
+    "website": "https://sites.google.com/site/aggiesaifd/home"
+  },
+  {
     "name": "Student Bar Association",
     "description": "The purpose of the SBA is to support and encourage academic excellence and professional growth among students; ensure the attainment and preservation of the rights of the individual student to acquire a quality legal education in a just and reasonable manner; and serve as the vehicle for interaction and communication...",
     "url": "https://getinvolved.tamu.edu/org/sba",
@@ -7772,7 +7836,7 @@
     "description": "The Walton Community Council brings residents together and helps make Walton Hall feel like home. We represent resident interests, create engaging programs and traditions, and work to enhance the residential experience. By getting involved, members can build connections, develop leadership skills, and make a direct impact on where they live....",
     "url": "https://getinvolved.tamu.edu/org/walton-hall",
     "email": "waltonhalldirector@tamu.edu",
-    "phone": "none",
+    "phone": "9798471879",
     "website": "https://rha.tamu.edu/cc/"
   },
   {
@@ -7862,6 +7926,14 @@
     "email": "none",
     "phone": "none",
     "website": "https://medicine.tamu.edu/academics/students/organizations/index.html"
+  },
+  {
+    "name": "TAMSA Family Medicine Interest Group",
+    "description": "The Family Medicine Interest Group (FMIG) provides a forum for students interested in family medicine.",
+    "url": "https://getinvolved.tamu.edu/org/fmig",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
   },
   {
     "name": "TAMSA Med Pride",
@@ -8409,7 +8481,7 @@
   },
   {
     "name": "TAMUG Echo 2",
-    "description": "",
+    "description": "To develope individuals devoted to serving the greater good.",
     "url": "https://getinvolved.tamu.edu/org/3349",
     "email": "none",
     "phone": "none",
@@ -8427,7 +8499,7 @@
     "name": "TAMUG Food Recovery Network",
     "description": "To reduce food waste and provide food to those who need it. We also educate the general student population on how waste is created and how it can be stopped.",
     "url": "https://getinvolved.tamu.edu/org/frn",
-    "email": "none",
+    "email": "frntamug@gmail.com",
     "phone": "none",
     "website": "https://www.instagram.com/frntamug/"
   },
@@ -8555,8 +8627,8 @@
     "name": "TAMUG Men's Soccer Club",
     "description": "The purpose of TAMUG Men's Soccer is to bring togeteher a group of students who love to play soccer and complete in collegiate level games. This club is also meant to bond students and help them transition into college easily by creating a network in which they can help each...",
     "url": "https://getinvolved.tamu.edu/org/lka-honors",
-    "email": "matthewcmckenna11@tamu.edu",
-    "phone": "none",
+    "email": "diegocq@tamu.edu",
+    "phone": "7573868405",
     "website": "none"
   },
   {
@@ -8565,6 +8637,14 @@
     "url": "https://getinvolved.tamu.edu/org/1419",
     "email": "Kendricf@tamu.edu",
     "phone": "4699009240",
+    "website": "none"
+  },
+  {
+    "name": "TAMUG Motorcycle Club",
+    "description": "The Texas A&M University at Galveston Motorcycle Club is dedicated to fostering a safe, inclusive, and passionate community of riders and enthusiasts. We promote responsible motorcycling, rider education, and camaraderie through organized rides, skill development, and social engagement, while representing our university with integrity and respect.",
+    "url": "https://getinvolved.tamu.edu/org/tamugmc",
+    "email": "none",
+    "phone": "none",
     "website": "none"
   },
   {
@@ -8737,7 +8817,7 @@
   },
   {
     "name": "TAMUG SPROUT",
-    "description": "Environmental club immersing students in connections with nature and becoming involved in community through gardening, outdoor activities such as hiking, cleaning up litter/washed up trash, playing topical games, and hosting knowledgeable guest speakers.",
+    "description": "We are the on-campus garden club!\u00a0 We focus on helping students find ways to spread their green thumbs across campus. \u00a0Allow students to help make a change within the community by focusing on growing fresh produce for the on-campus food pantry!",
     "url": "https://getinvolved.tamu.edu/org/tamug-sprout",
     "email": "none",
     "phone": "none",
@@ -8771,8 +8851,8 @@
     "name": "TAMUG Student Government Association",
     "description": "The Student Government Association at the Texas A&M University College of Marine Sciences and Maritime Studies embodies the six Aggie core values of Respect, Excellence, Loyalty, Leadership, Integrity, and Selfless Service. Through campus outreach, the Student Senate encourages the building of relationships between students and engaging in the plethora of...",
     "url": "https://getinvolved.tamu.edu/org/tamug-sga",
-    "email": "none",
-    "phone": "none",
+    "email": "sga@tamug.edu",
+    "phone": "6262971224",
     "website": "none"
   },
   {
@@ -8841,10 +8921,10 @@
   },
   {
     "name": "TAMUG Women in Maritime Operations",
-    "description": "Our Motto:\r\nOur Motto is simple: Educate. Engage. Elevate. women in their careers so they can excel and thrive.\r\n\u00a0\r\nOur Mission:\r\nWIMOs is dedicated to retaining, advancing, and promoting women in the maritime industry through sharing knowledge and continuing education.\r\n\u00a0\r\nOur Vision:\r\nSupport and uplift women who demonstrate an interest...",
+    "description": "Our Motto:\r\nOur Motto is simple: Educate. Engage. Elevate. women in their careers so they can excel and thrive.\r\n\u00a0\r\nOur Mission:\r\nWIMOs is dedicated to retaining, advancing, and promoting women and men in the maritime industry through sharing knowledge and continuing education.\r\n\u00a0\r\nOur Vision:\r\nSupport and uplift women who demonstrate...",
     "url": "https://getinvolved.tamu.edu/org/2759",
     "email": "wimostamu@wimos.org",
-    "phone": "none",
+    "phone": "228-732-6226",
     "website": "none"
   },
   {
@@ -8900,7 +8980,7 @@
     "description": "TAMUSIC is Texas A&M's musician social org, a space where students of any musical caliber can meet other musicians to talk, write, and share music. Whether you're looking to start a new band or want to develop your songwriting skills further, this is the low-pressure environment to get your music...",
     "url": "https://getinvolved.tamu.edu/org/tamusic",
     "email": "tamusicofficialclub@gmail.com",
-    "phone": "none",
+    "phone": "2522590227",
     "website": "https://linktr.ee/tamusicclub"
   },
   {
@@ -8998,6 +9078,14 @@
     "email": "none",
     "phone": "none",
     "website": "none"
+  },
+  {
+    "name": "Texas A&M Aggie Dance Team",
+    "description": "The mission and purpose of this organization is to show immense spirit for our university by performing at all home Mens and Womens Basketball, football, baseball, and select volleyball games. We also represent Texas A&M at the Dance Team Union collegiate national championship competition, where we have won four national...",
+    "url": "https://getinvolved.tamu.edu/org/adt",
+    "email": "aggiedanceteam@athletics.tamu.edu",
+    "phone": "none",
+    "website": "http://12thman.com/danceteam"
   },
   {
     "name": "Texas A&M Agronomy Society",
@@ -9432,6 +9520,14 @@
     "website": "http://www.TAMUhandball.org"
   },
   {
+    "name": "Texas A&M Health Science Center - College of Nursing Class Council",
+    "description": "To enhance the educational experience by providing opportunities for networking among students, to represent the interests of students to the administration of the School of Nursing and the HSC, to promote the nursing profession, to develop community outreach through service activities and to assist students in developing leadership skills.",
+    "url": "https://getinvolved.tamu.edu/org/1007",
+    "email": "crosen@tamu.edu",
+    "phone": "97984360120",
+    "website": "none"
+  },
+  {
     "name": "Texas A&M Health Science Center College of Nursing Student Nurses' Association",
     "description": "The mission and purpose of the Texas A&M Health Science Center School of Nursing Student Nurses' Association is to organize, represent, and mentor students preparing for initial licensure as registered nurses, as well as those enrolled in baccalaureate completion programs. Convey the standards and ethics of the nursing profession. Promote...",
     "url": "https://getinvolved.tamu.edu/org/tamhscconsna",
@@ -9651,8 +9747,8 @@
     "name": "Texas A&M Pickleball Club",
     "description": "The Texas A&M Pickleball Club is dedicated to promoting and growing the sport of pickleball by providing opportunities for students of all skill levels to get involved. Our mission is to foster participation in this fast-growing sport through regular practices, tournaments, social events, and skill development clinics. We aim to...",
     "url": "https://getinvolved.tamu.edu/org/pbc",
-    "email": "tamupickleballclub@gmail.com",
-    "phone": "9033052153",
+    "email": "none",
+    "phone": "none",
     "website": "none"
   },
   {
@@ -9901,7 +9997,7 @@
     "url": "https://getinvolved.tamu.edu/org/wda",
     "email": "tamucvmwda@gmail.com",
     "phone": "none",
-    "website": "http://scwda.tamu.edu"
+    "website": "none"
   },
   {
     "name": "Texas A&M Student Chpt. of the American Society of Landscape Architects",
@@ -9918,6 +10014,14 @@
     "email": "info.tamuSEAoT@gmail.com",
     "phone": "none",
     "website": "http://seaot.tamu.edu"
+  },
+  {
+    "name": "Texas A&M Table Tennis Club",
+    "description": "Educate Aggies about Table Tennis and have a better understanding of one of the top major youngest racket sport, where all level of players are welcomed! Socialize with other table tennis players! Complete at against other universities at NCTTA and show our Aggie pride.\u00a0To join, please follow this link:...",
+    "url": "https://getinvolved.tamu.edu/org/ttc",
+    "email": "justinmoore@tamu.edu",
+    "phone": "none",
+    "website": "none"
   },
   {
     "name": "Texas A&M Tabletop Troupe",
@@ -10433,7 +10537,7 @@
   },
   {
     "name": "TLAC Graduate Student Association",
-    "description": "To assist graduate students in the Department of Teaching, Learning and Culture and to address their individual and collective concerns pertaining to their graduate experience.",
+    "description": "\u201cFind your people. Find your resources. Make your grad school feel a little less\u2026 grad school\u201d \u00a0 The aim of the TLAC Graduate Student Association is to support graduate students by creating opportunities for professional development, networking, leadership, and community building. The association seeks to connect students across programs, provide...",
     "url": "https://getinvolved.tamu.edu/org/tlac",
     "email": "none",
     "phone": "none",
@@ -10630,6 +10734,14 @@
     "email": "trhea@tamu.edu",
     "phone": "none",
     "website": "http://tamubands.tamu.edu"
+  },
+  {
+    "name": "Uplift Education Mentorship Initiative",
+    "description": "The mission of UEMI is to bridge the gap between medical education and community service by mentoring students at Uplift Heights Preparatory. Through volunteer involvement, project-based learning, and career mentorship, we aim to inspire the next generation of healthcare professionals and empower students from underserved communities to pursue higher education...",
+    "url": "https://getinvolved.tamu.edu/org/3552",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
   },
   {
     "name": "Uplifting Recreation In Tag",
@@ -10848,6 +10960,14 @@
     "website": "http://tamuwig.com"
   },
   {
+    "name": "Women in Industrial & Systems Engineering",
+    "description": "Our mission is to support and empower women and underrepresented individuals in industrial and systems engineering to excel in both their professional and personal lives. We are committed to offering mentorship, leadership and skill development, and networking opportunities to prepare the next generation of leaders in this field.",
+    "url": "https://getinvolved.tamu.edu/org/wisen",
+    "email": "wisen.tamu@gmail.com",
+    "phone": "8328410470",
+    "website": "none"
+  },
+  {
     "name": "Women in Information Systems and Excellence",
     "description": "Women in Information Systems and Excellence (WISE) has a mission to foster growth, build a strong community, and prepare women in the information systems field for a successful and inspiring future. We are committed to achieving this mission through our values of community, networking, and insight.\r\n\r\nWISE serves as a...",
     "url": "https://getinvolved.tamu.edu/org/2608",
@@ -10861,7 +10981,7 @@
     "url": "https://getinvolved.tamu.edu/org/wims",
     "email": "tamu.wims@gmail.com",
     "phone": "none",
-    "website": "https://sukhishvililab.tamu.edu/outreach/wims/"
+    "website": "none"
   },
   {
     "name": "Women in Mechanical Engineering",
