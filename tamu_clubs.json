@@ -56,6 +56,14 @@
     "website": "none"
   },
   {
+    "name": "1st Wing",
+    "description": "The Wing will pursue excellence by founding an environment that demands growth, exercises leadership, challenges character, and encourages cadets to participate fully in the life-changing experience of the Corps of Cadets. Above all, we will strive to selflessly serve those around us.",
+    "url": "https://getinvolved.tamu.edu/org/1st-wing",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
+  },
+  {
     "name": "2D Visual Developers",
     "description": "To provide a space where those with a shared interest in comics, animation, graphic novels, and concept art can come together and create.",
     "url": "https://getinvolved.tamu.edu/org/2vd",
@@ -693,7 +701,7 @@
     "url": "https://getinvolved.tamu.edu/org/akcam",
     "email": "none",
     "phone": "none",
-    "website": "http://aggiekcam.weebly.com"
+    "website": "none"
   },
   {
     "name": "Aggie Kolbitar Society",
@@ -4257,7 +4265,7 @@
   },
   {
     "name": "Good Bull Fund",
-    "description": "Through generous support of the Office of the President, this fund is established to cover or offset expenses related to the planning and implementation of student-led activities at Texas A&M University. Fall 2026 Funding Period: Applications for Fall 2026 funding are not yet available as we revamp the Good Bull...",
+    "description": "Through generous support of the Office of the President, this fund is established to cover or offset expenses related to the planning and implementation of student-led activities at Texas A&M University. Fall 2026/Early Spring 2027 Funding Period: Applications for Fall 2026-Early Spring 2027 (for programs in December 2026 - February...",
     "url": "https://getinvolved.tamu.edu/org/goodbull",
     "email": "goodbullfund@tamu.edu",
     "phone": "none",
@@ -5744,6 +5752,14 @@
     "website": "https://instagram.com/tamunphc/"
   },
   {
+    "name": "National Residence Hall Honorary",
+    "description": "National Residence Hall Honorary - Dan Mizer Chapter Where Leadership Leaves a Legacy. NRHH is the premier honor society for student leaders living on campus. It's for those who go above and beyond, those who lead with purpose, those who serve with passion, and those who uplift others without expecting...",
+    "url": "https://getinvolved.tamu.edu/org/nrhh",
+    "email": "nrhh@reslife.tamu.edu",
+    "phone": "none",
+    "website": "http://nrhh.tamu.edu"
+  },
+  {
     "name": "National Society of Black Engineers",
     "description": "The mission of the National Society of Black Engineers is to increase the number of culturally responsible black engineers who excel academically, succeed professionally and positively impact the community.",
     "url": "https://getinvolved.tamu.edu/org/nsbe",
@@ -6944,6 +6960,14 @@
     "website": "http://Aggiesigep.com"
   },
   {
+    "name": "Sigma Phi Lambda",
+    "description": "Sigma Phi Lambda is a national Christian sorority that exists for the sole purpose of glorifying our Lord Jesus Christ and making His name great. This is done by providing a source of fellowship to Christian women who sincerely seek to know His person, His will, and His ways. Sigma...",
+    "url": "https://getinvolved.tamu.edu/org/sigma-phi-lambda",
+    "email": "aggiephilambofficers@gmail.com",
+    "phone": "none",
+    "website": "https://linktr.ee/aggiephilamb"
+  },
+  {
     "name": "Sigma Phi Omega",
     "description": "Sigma Phi Omega was originally founded in 1949 at the University of Southern California by a group of Japanese women in response to growing anti-Asian-American sentiment that followed as a result of World War II and Pearl Harbor. We are the oldest continuing Asian American sorority in the nation, as...",
     "url": "https://getinvolved.tamu.edu/org/spo",
@@ -7056,14 +7080,6 @@
     "website": "https://l.instagram.com/?u=https%3A%2F%2Fsites.google.com%2Fview%2Ftamusubs%3Ffbclid%3DPAAabMcD_bJvPumfNDQ9RVF2wvI6Xl-Y8iycCNveQaSwv357Bc-wKQY44CyQw_aem_AcmzdFSirFe8OKztsZMWVz0M8qB9KC5lNdtq8WaKUKWl8cy2OmrR4GF5MNMM6TDSctY&e=AT1QM-edFfi0f3_RWIckU_9O6e0SpFI-"
   },
   {
-    "name": "The Society for Underwater Technology - Texas A&M University College Station Student Chapter",
-    "description": "SUT is a multi-disciplinary society that brings together other individuals and organizations with a common interest in underwater technology, ocean science, and offshore engineering. The student chapter here at Texas A&M is focused on Career Growth and Networking as well as connecting students with Industry Professionals and Practicing Engineers to...",
-    "url": "https://getinvolved.tamu.edu/org/sut",
-    "email": "SUT.TAMU@gmail.com",
-    "phone": "none",
-    "website": "none"
-  },
-  {
     "name": "Society of Agricultural Finance, Insurance, and Real Estate",
     "description": "The Society of Finance, Insurance, and Real Estate aims to introduce students to career opportunities in the fields of finance, insurance, and real estate, as well as related areas such as law, banking and energy. We encourage our members to build professional relationships and network with industry professionals and employers....",
     "url": "https://getinvolved.tamu.edu/org/fire",
@@ -7148,14 +7164,6 @@
     "description": "The purpose of the organization is to promote student awareness and the education of polymer science and engineering by providing a unique opportunity for networking, mentoring, education and bonding over the common interest of plastics.",
     "url": "https://getinvolved.tamu.edu/org/spe",
     "email": "spe@plastics.tamu.edu",
-    "phone": "none",
-    "website": "none"
-  },
-  {
-    "name": "Society of Pre-Anesthesiology Assistants",
-    "description": "The purpose of the Society of Pre-Anesthesiologist Assistants (SPAA) at Texas A&M is to:\r\n\t\u2022\tPromote awareness and knowledge about the Certified Anesthesiologist Assistant (CAA) career path among students.\r\n\t\u2022\tProvide opportunities for volunteer work, shadowing experiences, and professional development for members interested in anesthesiology and related health fields.\r\n\t\u2022...",
-    "url": "https://getinvolved.tamu.edu/org/3023",
-    "email": "tamupreaasociety@gmail.com",
     "phone": "none",
     "website": "none"
   },
@@ -7656,14 +7664,6 @@
     "website": "http://sga.tamu.edu"
   },
   {
-    "name": "Student Health Environments Association",
-    "description": "Student Health Environments Association (SHEA) \u00a0 The Student Health Environments Association (SHEA) is a student-led organization dedicated to advancing awareness, interest, and knowledge in the field of healthcare design. SHEA fosters collaboration among students, faculty, and professionals by creating opportunities for meaningful dialogue, interdisciplinary learning, and innovation in the design...",
-    "url": "https://getinvolved.tamu.edu/org/shea",
-    "email": "sheatamu@gmail.com",
-    "phone": "none",
-    "website": "https://www.arch.tamu.edu/impact/centers-institutes-outreach/chsd/service/shea/"
-  },
-  {
     "name": "Student Life",
     "description": "Student Life strives to enhance your opportunities as a student to participate fully in the university experience. We do this by providing you with information, services, programs and involvement opportunities that facilitate responsible life choices and promote awareness of yourself and of your community. Each of the program areas within...",
     "url": "https://getinvolved.tamu.edu/org/student-life",
@@ -7920,8 +7920,8 @@
     "website": "http://medicine.tamu.edu"
   },
   {
-    "name": "TAMSA Class of 2026",
-    "description": "Texas A&M College of Medicine Class of 2026 Class Officers exist to organize, support, and provide leadership for the class.",
+    "name": "TAMSA Class of 2030",
+    "description": "Texas A&M College of Medicine Class of 2030 Class Officers exist to organize, support, and provide leadership for the class.",
     "url": "https://getinvolved.tamu.edu/org/tamsa2026",
     "email": "none",
     "phone": "none",
@@ -8217,7 +8217,7 @@
   },
   {
     "name": "TAMU Students for Refugees",
-    "description": "Our mission at the Texas A&M chapter of Students for Refugees is to raise awareness and foster education about the ongoing global refugee crisis stemming from persecution, conflict, violence, and human rights violations. We are committed to cultivating a comprehensive understanding of migration issues, spanning pre-migration, transmigration, and post-migration phases,...",
+    "description": "Our mission at the Texas A&M chapter of Students for Refugees is to raise awareness and foster education about the ongoing global refugee crisis. We are committed to cultivating a comprehensive understanding of migration issues, spanning pre-migration, transmigration, and post-migration phases, with a specific focus on how these issues impact...",
     "url": "https://getinvolved.tamu.edu/org/2605",
     "email": "none",
     "phone": "none",
@@ -9161,7 +9161,7 @@
   },
   {
     "name": "Texas A&M Anthropological Society",
-    "description": "We are the Texas A&M Anthropological Society! Our goal is to provide members with presentations and activities that suit their research/personal interests, while encouraging public outreach and community. Everyone is welcome! tamuanthsociety12@gmail.com",
+    "description": "We are the Texas A&M Anthropological Society! Our goal is to provide members with presentations and activities that suit their research/personal interests, while encouraging public outreach and community. Everyone is welcome! \u00a0 We meet on Wednesdays at 5:30 in ANTH 237 tamuanthsociety12@gmail.com",
     "url": "https://getinvolved.tamu.edu/org/967",
     "email": "none",
     "phone": "none",
@@ -9246,14 +9246,6 @@
     "email": "tamunaba76@gmail.com",
     "phone": "none",
     "website": "https://nabainc.org"
-  },
-  {
-    "name": "The Texas A&M Chapter of The Coasts, Oceans, Ports, and Rivers Institute",
-    "description": "1.TAMU COPRI shall serve as a leader in improving knowledge, education, development, and the practice of civil engineering and other disciplines in the coastal, ocean, port, waterways, riverine, and wetlands environment; 2.Serve its members and society by uniting the disciplines dealing with coasts, oceans, ports and rivers; 3.Promote activities of...",
-    "url": "https://getinvolved.tamu.edu/org/copri",
-    "email": "none",
-    "phone": "none",
-    "website": "none"
   },
   {
     "name": "Texas A&M Cheer Squad",
@@ -9592,14 +9584,6 @@
     "website": "https://pharmacy.tamu.edu/current/student-organizations.html"
   },
   {
-    "name": "Texas A&M Health Science Center Rangel College of Pharmacy AMCP Student Pharmacist Chapter",
-    "description": "The mission is to promote sound managed care pharmacy principles through education and professional development of its student pharmacist members. The purposes of this organization are: a) To encourage the education and support the advancement of managed care pharmacy b) To enhance the common academic and professional interests of the...",
-    "url": "https://getinvolved.tamu.edu/org/amcp",
-    "email": "tofili@tamu.edu",
-    "phone": "none",
-    "website": "http://www.amcp.org"
-  },
-  {
     "name": "Texas A&M Health Science Center School of Nursing Round Rock Class Council",
     "description": "The purposes of the Class Council are to enhance the educational experience by providing opportunities for networking among students, to represent the interests of students to the administration of the School of Nursing (SON), to promote the nursing profession, to develop community outreach through service activities, and to assist students...",
     "url": "https://getinvolved.tamu.edu/org/1295",
@@ -9878,14 +9862,6 @@
     "email": "quid@quidditch.tamu.edu",
     "phone": "none",
     "website": "http://quidditch.tamu.edu"
-  },
-  {
-    "name": "Texas A&M Recon Company",
-    "description": "Texas A&M Recon Company is a student organization that offers Aggies a unique course designed to both increase the physical fitness of members and to familiarize them to basic reconnaissance and infantry tactics. Our training methods are based off of the US Marine Corps Basic Reconnaissance Course (BRC), focused on...",
-    "url": "https://getinvolved.tamu.edu/org/recon",
-    "email": "jack.fishman@tamu.edu",
-    "phone": "6822280083",
-    "website": "none"
   },
   {
     "name": "Texas A&M Revelation Outdoors",
@@ -10453,7 +10429,7 @@
     "url": "https://getinvolved.tamu.edu/org/weightlifting",
     "email": "TXAMweightlifting@gmail.com",
     "phone": "none",
-    "website": "https://www.instagram.com/aggie_weightlifting"
+    "website": "https://www.tamuweightlifting.com/"
   },
   {
     "name": "Texas A&M Women In Aviation",
