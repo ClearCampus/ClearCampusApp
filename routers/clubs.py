@@ -509,18 +509,13 @@ def search_clubs(query: str, limit: int = 5) -> List[dict]:
                 reranked = pc.inference.rerank(
                     model="bge-reranker-v2-m3",
                     query=query,
-                    documents=match_texts,
+                    documents=match_texts[:100],
                     top_n=limit,
                     return_documents=True,
                 )
                 reranked_matches = []
                 for item in reranked.data:
                     if item.index is None:
-                        continue
-                    # Skip results the reranker has no confidence in (flat floor score).
-                    # 0.28 is below the observed floor of ~0.25 for irrelevant results
-                    # but above genuine low-confidence matches.
-                    if item.score < 0.28:
                         continue
                     original = matches[item.index]
                     original["rerank_score"] = item.score
