@@ -168,6 +168,14 @@
     "website": "none"
   },
   {
+    "name": "A&M Students Promoting Innovation and Research Advancement",
+    "description": "A&M Students Promoting Innovation and Research Advancement (ASPIRA) aims to empower students with the research skills and opportunities. By offering practical workshops, networking sessions, and professional development activities, ASPIRA fosters academic excellence, leadership skills, and research readiness. We welcome all students seeking to learn, grow, and serve in research experiences...",
+    "url": "https://getinvolved.tamu.edu/org/aspira",
+    "email": "aspiratamu@gmail.com",
+    "phone": "none",
+    "website": "none"
+  },
+  {
     "name": "A-Company Band",
     "description": "A-Company is one of the six companies that make up the Aggie Band in the Corps of Cadets. Our outfit will build men and women of character who relentlessly pursue their development as scholars, professionals, and leaders. We believe that integrity cannot be bought, excellence is achieved by hard work,...",
     "url": "https://getinvolved.tamu.edu/org/111",
@@ -214,6 +222,14 @@
     "email": "tamu.acf@gmail.com",
     "phone": "none",
     "website": "http://acf.tamu.edu"
+  },
+  {
+    "name": "Aerospace Engineering Graduate Student Association",
+    "description": "1. Enrich the graduate experience for graduate students in the Aerospace Engineering department 2. Act as liaisons between the graduate student body within the Aerospace Engineering department and the department itself, College of Engineering, and University. 3. Provide a platform for graduate students to interact with each other and organize...",
+    "url": "https://getinvolved.tamu.edu/org/aegsa",
+    "email": "aegsa@tamu.edu",
+    "phone": "none",
+    "website": "https://aegsa6.wixsite.com/aegsa"
   },
   {
     "name": "Aesthetic and Cosmetic Dentistry Club",
@@ -857,11 +873,11 @@
   },
   {
     "name": "Aggie Parent & Family Ambassadors",
-    "description": "The Aggie Parent and Family Ambassadors are dedicated to strengthening the connection between students and families at Texas A&M. By introducing Aggie Families to university traditions, encouraging involvement, and amplifying family voices through campus events and programming, our Ambassadors help foster a supportive community for Aggies.",
+    "description": "Aggie Parent & Family Ambassadors (APFA) is a student leadership organization dedicated to strengthening the connection between Texas A&M students, their parents, and family members. APFA serves as representatives of the department of Student Life and helps to create meaningful experiences for Aggie families through involvement in Family Weekend, the...",
     "url": "https://getinvolved.tamu.edu/org/apfa",
     "email": "apfa@tamu.edu",
     "phone": "979-845-5826",
-    "website": "https://familyprograms.tamu.edu/involvement/aggie-parent-and-family-ambassadors/"
+    "website": "https://www.tx.ag/APFAProgram"
   },
   {
     "name": "Aggie Pediatric Nursing Association",
@@ -1720,14 +1736,6 @@
     "website": "https://tamu-arc.wixsite.com/redcrosstamu"
   },
   {
-    "name": "American Rock Mechanics Association Texas A&M University Student Chapter",
-    "description": "ARMA-TAMU Student Chapter's missions and visions are: 1) to provide a forum for collaboration among students, faculty, and others with an interest in rock mechanics and geo-engineering; 2) to encourage participation in professional and academic pursuits in the discipline; 3) to contribute to and benefit from ARMA programs and activities,...",
-    "url": "https://getinvolved.tamu.edu/org/arma",
-    "email": "xueling.song@tamu.edu",
-    "phone": "7016102957",
-    "website": "none"
-  },
-  {
     "name": "American Society of Agricultural and Biological Engineers",
     "description": "Howdy! \u00a0Interested? \u00a0Have questions? \u00a0Let us Know!\u00a0 President - tamu.asabe.president@gmail.com Vice-President - \u00a0tamu.asabe.vicepresident@gmail.com",
     "url": "https://getinvolved.tamu.edu/org/asabe",
@@ -1822,14 +1830,6 @@
     "email": "aei.tamu@gmail.com",
     "phone": "none",
     "website": "https://aeitamu.wixsite.com/official"
-  },
-  {
-    "name": "Armenian Students' Association",
-    "description": "The Armenian Students' Association aims to connect all students of Texas A&M with the rich culture and history of the Armenian people, and the Republic of Armenia. We also aim to highlight the special relationship Texas A&M has with Armenia and its people, through the many educational, research, and cultural...",
-    "url": "https://getinvolved.tamu.edu/org/asatamu",
-    "email": "tamuarmenianstudents@gmail.com",
-    "phone": "9728393259",
-    "website": "none"
   },
   {
     "name": "Arnold Air Society",
@@ -2368,14 +2368,6 @@
     "website": "http://www.tamumha.com"
   },
   {
-    "name": "Business Healthcare Association",
-    "description": "The Business Healthcare Association seeks to educate, connect, and empower students interested in the intersection of healthcare and business through professional development, leadership, networking, and service.",
-    "url": "https://getinvolved.tamu.edu/org/3517",
-    "email": "tamu.businesshealthcare@gmail.com",
-    "phone": "7372031589",
-    "website": "none"
-  },
-  {
     "name": "Business Honors Association",
     "description": "BHA strives to create a link between Business Honors members and former honor students and business professionals through the use of professional development, community service, and social events. BHA's goal is to develop and inspire future business leaders with a vision for tomorrow as well as to enhance the image...",
     "url": "https://getinvolved.tamu.edu/org/bha",
@@ -2590,6 +2582,14 @@
     "email": "tamuchenusac@gmail.com",
     "phone": "none",
     "website": "https://tamuchen-usac.weebly.com"
+  },
+  {
+    "name": "Chi Epsilon",
+    "description": "Chi Epsilon is dedicated to the purpose of maintaining and promoting the status of Civil Engineering as an ideal profession. Chi Epsilon is the only official Civil Engineering honors society. Chi Epsilon only accepts the top third of the current Civil Engineering Juniors and Seniors at the beginning of each...",
+    "url": "https://getinvolved.tamu.edu/org/chi-epsilon",
+    "email": "chiepsilontamu@gmail.com",
+    "phone": "none",
+    "website": "https://sites.google.com/view/tamuchiepsilon/about?authuser=3"
   },
   {
     "name": "Chi Omega",
@@ -3099,6 +3099,14 @@
     "name": "Corps of Cadets Triathlon Team",
     "description": "The purpose of the Texas A&M Corps of Cadets Triathlon Team is to allow cadets to train in swimming, cycling, and running in order to compete and win in various triathlon races. With the aid of the Corps of Cadets Association, we demonstrate leadership and high athletic performance to develop...",
     "url": "https://getinvolved.tamu.edu/org/corps-triathlon",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
+  },
+  {
+    "name": "Corps of Cadets Women's Soccer Team",
+    "description": "The purpose of the Corps Women's Soccer Team (CWST) is to allow any eligible person to participate in a competitive atmosphere in soccer at the regional and national levels in the Texas Collegiate Soccer League and/or intramural league . The CWST aims to promote and develop positive attitudes and strong...",
+    "url": "https://getinvolved.tamu.edu/org/cwst",
     "email": "none",
     "phone": "none",
     "website": "none"
@@ -3972,7 +3980,7 @@
     "description": "The purpose of FADE is to create a culture of forward thinking for Freshmen at Texas A&M University. We strive to equip our members with the Aggie Core values so that they can thrive, not only during their Freshmen year, but also through the rest of their time at A&M...",
     "url": "https://getinvolved.tamu.edu/org/fade",
     "email": "fade.directorstaff@gmail.com",
-    "phone": "8305000368",
+    "phone": "none",
     "website": "none"
   },
   {
@@ -4265,7 +4273,7 @@
   },
   {
     "name": "Good Bull Fund",
-    "description": "Through generous support of the Office of the President, this fund is established to cover or offset expenses related to the planning and implementation of student-led activities at Texas A&M University. Fall 2026/Early Spring 2027 Funding Period: Applications for Fall 2026-Early Spring 2027 (for programs in December 2026 - February...",
+    "description": "Through generous support of the Office of the President, this fund is established to cover or offset expenses related to the planning and implementation of student-led activities at Texas A&M University. Fall 2026/Early Spring 2027 Funding Period Applications for Fall 2026-Early Spring 2027 (for programs in December 2026 - February...",
     "url": "https://getinvolved.tamu.edu/org/goodbull",
     "email": "goodbullfund@tamu.edu",
     "phone": "none",
@@ -4278,6 +4286,14 @@
     "email": "gpsg@tamu.edu",
     "phone": "none",
     "website": "https://gpsg.tamu.edu"
+  },
+  {
+    "name": "Graduate Representative Advisory Board",
+    "description": "The Graduate Representative Advisory Board exists to provide a forum for the Educational Administration and Human Resource Development (EAHR) Department graduate students within the various programs of the department in the College of Education and Human Development to have an active voice in the affairs of the department relating to...",
+    "url": "https://getinvolved.tamu.edu/org/grab",
+    "email": "eahrgrab@tamu.edu",
+    "phone": "none",
+    "website": "http://grab.tamu.edu"
   },
   {
     "name": "Graduate Student Association of the College of Veterinary Medicine",
@@ -4470,6 +4486,14 @@
     "email": "hsdatamucod@gmail.com",
     "phone": "none",
     "website": "https://getinvolved.tamu.edu/org/hsda"
+  },
+  {
+    "name": "HMGT Grad",
+    "description": "To ensure and promote the success of past, present, and future HMGT graduate students in the realms of academic pursuit, service to the University and department, and social development.",
+    "url": "https://getinvolved.tamu.edu/org/hmgt-grad",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
   },
   {
     "name": "Hobby Community Council",
@@ -5240,6 +5264,14 @@
     "website": "https://www.linkedin.com/in/material-advantage-tamu-8313042b2/"
   },
   {
+    "name": "Maternal and Child Health Student Organization",
+    "description": "The Texas A&M Maternal and Child Health Student Interest Group is a resource to provide career development opportunities, awareness about maternal and child issues in public health, and networking between students and public health professionals.",
+    "url": "https://getinvolved.tamu.edu/org/mchso",
+    "email": "none",
+    "phone": "none",
+    "website": "https://www.facebook.com/mchsoaggies"
+  },
+  {
     "name": "Mays MBA Association",
     "description": "Serve as a liaison amongst the MBA classes, programs, peers, and former students, enriching the MBA experience inside and outside the classroom by building a community of learning and camaraderie",
     "url": "https://getinvolved.tamu.edu/org/3148",
@@ -5896,14 +5928,6 @@
     "website": "http://tamuots.weebly.com"
   },
   {
-    "name": "Oceanography Graduate Council",
-    "description": "OGC is an organization consisting of the graduate students in the Department of Oceanography. It gives the students a voice in the Department and College affairs while providing resources to assist students in their studies and research.",
-    "url": "https://getinvolved.tamu.edu/org/ogc",
-    "email": "kdick@tamu.edu",
-    "phone": "9046126787",
-    "website": "none"
-  },
-  {
     "name": "The Odontological Honor Society",
     "description": "The purpose of the Odontological Honor Society is to honor D.D.S. candidates at the Texas A&M School of Dentistry for their academic success and commitment to leadership.",
     "url": "https://getinvolved.tamu.edu/org/odont",
@@ -6371,6 +6395,14 @@
     "name": "Pre-Orthodontics Society",
     "description": "The TAMSOD Pre-Orthodontics Society is established for the purpose of providing information and tools to help pre-doctoral students at TAMSOD to learn more about the orthodontic specialty and prepare them to apply and receive entry into residency programs.",
     "url": "https://getinvolved.tamu.edu/org/1267",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
+  },
+  {
+    "name": "Pre-Pediatric Dental Society",
+    "description": "The mission of the Pre-Pediatric Dental Society is to support and provide resources for students interested in pursuing pediatric dental residency through various meetings and community service opportunities.",
+    "url": "https://getinvolved.tamu.edu/org/3564",
     "email": "none",
     "phone": "none",
     "website": "none"
@@ -7164,6 +7196,14 @@
     "description": "The purpose of the organization is to promote student awareness and the education of polymer science and engineering by providing a unique opportunity for networking, mentoring, education and bonding over the common interest of plastics.",
     "url": "https://getinvolved.tamu.edu/org/spe",
     "email": "spe@plastics.tamu.edu",
+    "phone": "none",
+    "website": "none"
+  },
+  {
+    "name": "Society of Pre-Anesthesiology Assistants",
+    "description": "The purpose of the Society of Pre-Anesthesiologist Assistants (SPAA) at Texas A&M is to:\r\n\t\u2022\tPromote awareness and knowledge about the Certified Anesthesiologist Assistant (CAA) career path among students.\r\n\t\u2022\tProvide opportunities for volunteer work, shadowing experiences, and professional development for members interested in anesthesiology and related health fields.\r\n\t\u2022...",
+    "url": "https://getinvolved.tamu.edu/org/3023",
+    "email": "tamupreaasociety@gmail.com",
     "phone": "none",
     "website": "none"
   },
@@ -8019,6 +8059,14 @@
     "name": "TAMSOD Music Society",
     "description": "TAMSOD Music Society serves to promote positive mental health, creativity, and students' passion for music. We encourage students to practice their respective musical fields, in order to publicly perform for the general student body. Through attending musical events both on and off campus, students and faculty can learn more about...",
     "url": "https://getinvolved.tamu.edu/org/1463",
+    "email": "none",
+    "phone": "none",
+    "website": "none"
+  },
+  {
+    "name": "TAMU Artificial Intelligence in Medicine",
+    "description": "To equip medical students with practical knowledge, critical skills, and ethical frameworks for integrating artificial intelligence into medicine and medical education. AlME connects students with one another and with opportunities to explore, develop, and evaluate Al-driven tools that enhance learning, clinical reasoning, and patient-centered care.",
+    "url": "https://getinvolved.tamu.edu/org/3537",
     "email": "none",
     "phone": "none",
     "website": "none"
@@ -8979,7 +9027,7 @@
     "name": "TAMUG Women's Soccer Club",
     "description": "Club soccer at Texas A&M University at Galveston contributes to the institution's reputation, upholds Aggie core values, fosters a sense of community, and provides a fun and competitive platform for women on campus, aligning with the university's broader objectives and values.",
     "url": "https://getinvolved.tamu.edu/org/1450",
-    "email": "kanamiletkiewicz@tamu.edu",
+    "email": "tamugwomenssoccer@gmail.com",
     "phone": "9724695117",
     "website": "none"
   },
@@ -9582,6 +9630,14 @@
     "email": "none",
     "phone": "none",
     "website": "https://pharmacy.tamu.edu/current/student-organizations.html"
+  },
+  {
+    "name": "Texas A&M Health Science Center Rangel College of Pharmacy AMCP Student Pharmacist Chapter",
+    "description": "The mission is to promote sound managed care pharmacy principles through education and professional development of its student pharmacist members. The purposes of this organization are: a) To encourage the education and support the advancement of managed care pharmacy b) To enhance the common academic and professional interests of the...",
+    "url": "https://getinvolved.tamu.edu/org/amcp",
+    "email": "tofili@tamu.edu",
+    "phone": "none",
+    "website": "http://www.amcp.org"
   },
   {
     "name": "Texas A&M Health Science Center School of Nursing Round Rock Class Council",
@@ -10717,7 +10773,7 @@
     "url": "https://getinvolved.tamu.edu/org/two42",
     "email": "college@brazosfellowship.com",
     "phone": "none",
-    "website": "http://www.brazosfellowship.com/college"
+    "website": "https://brazosfellowship.com/two42/"
   },
   {
     "name": "Tzu Chi Collegiate Association",
